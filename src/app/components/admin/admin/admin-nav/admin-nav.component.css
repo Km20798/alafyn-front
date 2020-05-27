@@ -1,0 +1,54 @@
+.color{
+  background-color: #231a6b;
+}
+a{
+  color: white;
+}
+img{
+  width: 10%;
+}
+button{
+  background-color: #231a6b;
+  border: none;
+  color: white;
+}
+ul{
+  list-style: none;
+  color: white;
+  margin-top: 1%;
+  
+}
+.image{
+  margin-right: -10%;
+}
+.form{
+  display: flex;
+  background-color: white;
+  border-radius: 10px;
+  padding: auto;
+}
+.form button{
+  background: white;
+  border-radius: 5px;
+  padding: auto;
+  color: black;
+}
+input{
+  width: 150px;
+  border: none;
+}
+.ul {
+  display: flex;
+  margin-right: 20%;
+}
+li{
+  margin-left: 10%;
+}
+a:hover{
+  color: crimson;
+  text-decoration: none;
+}
+.img{
+  width: 30%;
+  border-radius: 50px;
+}

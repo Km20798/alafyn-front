@@ -40,15 +40,25 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getUserByEmailAndPassword2(){
+  getUserByEmailAndPassword(event){
     
+   if(!this.email || !this.password){
+      if(!this.email){
+        this.error = 'Please Enter your Email';
+      }else{
+        this.error = 'please Enter your Passsword';
+      }
+   }else{
     this.auth.excuteJWTAuthenticationServices(this.email , this.password).subscribe(data =>{
       this.userService.getUser(this.email).subscribe(data => {
-        console.log(data.role);
         if(data.role === "ROLE_USER"){
           this.router.navigate(['/welcome']);
         }else if(data.role === "ROLE_ADMIN"){
           this.router.navigate(['/welcome/admin']);
+        }else if(data.role === "ROLE_STORE"){
+          this.router.navigate(['/store/welcome']);
+        }else{
+          this.router.navigate(['/login']);
         }
       });
     },error => {
@@ -59,9 +69,6 @@ export class LoginComponent implements OnInit {
         this.error=null;
       }, 5000);
     });
-     
-     
+   }
   }
-
-
 }

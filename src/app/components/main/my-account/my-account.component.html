@@ -5,11 +5,11 @@
   <div class="work">
    <div class="things">
      <div class="myaccount active">
-       <a routerLink="/{{user.username}}">
+       <a routerLink="/account">
         <i class="fa fa-file"></i><br>
         My Account
       </a>
-      </div>
+      </div>  
      <div class="order">
         <a routerLink="/welcome">
          <i class="fa fa-truck"></i><br>
@@ -17,7 +17,7 @@
        </a>
      </div>
      <div class="myorders">
-      <a routerLink="">
+      <a routerLink="/myOrders">
         <i class="fa fa-table"></i><br>
         My Orders
       </a>
@@ -28,28 +28,37 @@
 
 <table>
   <tr>
-    <th>UserName</th>
-    <td>{{user.username}}</td>
+    <th>From</th>
+    <th>To</th>
   </tr>
   <tr>
-    <th>Email</th>
-    <td>{{user.email}}</td>
+    <th> <input type="date" class="form-control"  name="from" [(ngModel)]="from" placeholder="From "> </th>
+    <th> <input type="date" class="form-control" name="to" [(ngModel)]="to" placeholder="To "> </th>
+  </tr>  
+</table>
+<button class="btnbtn" (click)="request()">Request Tax Receipt</button>
+<table class="tab">
+  <thead>
+    <tr>
+      <th>Order Number</th>
+      <th>Date</th>
+      <th>Total fees</th>
+    </tr>
+  </thead>
+  <tr *ngIf="!orders">
+    <td></td>
+    <td><p>no order here </p></td>
+    <td></td>
   </tr>
-  <tr>
-    <th>Phone</th>
-    <td>{{user.phone}}</td>
+  <tr *ngFor="let order of orders">
+    <td>{{order.code}}</td>
+    <td>{{order.time}}</td>
+    <td>{{order.price}}$</td>
   </tr>
-  <tr>
-    <th>Country</th>
-    <td>{{user.address.country}}</td>
-  </tr>
-  <tr>
-    <th>City</th>
-    <td>{{user.address.city}}</td>
-  </tr>
-  <tr>
-    <th>FullAddress</th>
-    <td>{{user.address.addressDet}}</td>
+  <tr class="tr">
+    <td></td>
+    <td></td>
+    <td>{{price}}$</td>
   </tr>
 </table>
   </div>

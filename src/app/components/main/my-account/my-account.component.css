@@ -1,25 +1,29 @@
 table{
   width: 80%;
   height: 100%;
-  margin-top: 10%;
-  margin-left: 10%;
+  margin-top: 2%;
+  margin-left: 15%;
   margin-bottom: 20px;
 }
-table  , tr , td , th{
-  text-align: center;
+input[type=date]{
+  width: 60%;
+  padding: 2%;
+  font-weight: bold;
 }
-tr{
-  height: 70px;
-  background-color: chartreuse;
-}
-td, th{
-  color: white;
-    font-size: 30px;
+.btnbtn{
+  margin-left: 40%;
+    background: #0b0b73;
+    color: white;
+    font-weight: bold;
     font-style: italic;
-    font-family: auto;
-}  
-th{
-  color: black;
+    font-family: none;
+    border: none;
+    padding: 1%;
+    margin-top: 2%;
+    border-radius: 7px;
+}
+tr p{
+  font-size: 25px;
 }
 .page{
   background-color: #040450;
@@ -58,4 +62,18 @@ th{
 }
 .active i , .active a{
   color: #f3cf00;
+}
+th , td{
+  text-align: center;
+}
+td{
+  font-weight: bold;
+  color: #7400f3;
+  font-size: 20px;
+}
+.tab thead{
+  border-bottom: 1px solid gray;
+}
+.tr{
+  border-top: 1px solid gray;
 }

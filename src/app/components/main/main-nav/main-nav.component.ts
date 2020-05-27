@@ -39,6 +39,10 @@ export class MainNavComponent implements OnInit {
   click(){
     this.show=!this.show;
   }
+  remove(){
+    
+    this.show = false;
+  }
   logout(){
     this.auth.logout();
     this.router.navigate(['/login']);

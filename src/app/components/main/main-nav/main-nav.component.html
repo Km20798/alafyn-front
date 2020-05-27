@@ -1,11 +1,11 @@
 <div class="nav">
   <nav>
     <div class="logo">
-      <img src="../../../../assets/img/black-logo.png" alt="">
+      <a routerLink="/welcome"><img src="../../../../assets/img/logo.png" alt=""></a>
     </div>
     <div class="info">
       <ul class="ul">
-        <li>
+        <li (click)="remove()">
           <button>
             <i class="fa fa-bell"></i>
           </button>
@@ -17,13 +17,14 @@
             </a>
           </button>
         </li>
+      
       </ul>
       <dialog open *ngIf="show">
         <ul>
-          <li>Notifications</li>
+          <li><a routerLink="/notifications">Notifications</a></li>
           <li>My Clients</li>
-          <li>My Wallet</li>
-          <li>My Profile</li>
+          <li><a routerLink="/myWallet">My Wallet</a></li>
+          <li><a routerLink="/myProfile">My Profile</a></li>
           <li><button (click)="logout()">Logout</button></li>
         </ul>  
       </dialog>

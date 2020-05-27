@@ -38,13 +38,13 @@ export class UsersComponent implements OnInit {
 
   update(email:string ){
     this.userService.getUser(email).subscribe(data => {
+      console.log(data);
       this.user = data;
-      console.log(data.email);
+      this.user.role = "ROLE_ADMIN";
+      this.userService.updateUser(email,this.user).subscribe(d => {
+        console.log(d);
+      })
     });
-    this.userService.updateUser(email , this.user).subscribe(data => {
-      this.getAll();
-    })
-    
   }
   
 

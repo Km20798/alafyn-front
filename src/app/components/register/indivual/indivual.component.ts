@@ -10,7 +10,8 @@ import { Email } from 'src/app/models/Email.model';
   styleUrls: ['./indivual.component.css']
 })
 export class IndivualComponent implements OnInit {
-
+  possible = "1234567890";
+  lengthOfCode = 6;
   user:User = {
     id:null , 
     username:'',
@@ -28,7 +29,11 @@ export class IndivualComponent implements OnInit {
   email:Email={
     to:this.user.email,
     subject:'Hi man',
-    body:'kokokoko the code is 123444'
+    body:`
+    Welcome in Our Application <br> 3lafyn is an application to make your life more easy <hr>
+    please Enter this code ` + +` to create new Account .<br><br>
+    Thanks for using our Application.:) 
+    `
   }
   conPass:string;
   active:boolean=false;
@@ -37,6 +42,17 @@ export class IndivualComponent implements OnInit {
   error:boolean=false;
   code:string;
   showCode:boolean=false;
+  theCode:string;
+
+  makeRandom(lengthOfCode: number, possible: string) {
+    let text = "";
+    for (let i = 0; i < lengthOfCode; i++) {
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+      return text;
+  }
+   
+  
 
   constructor(private userService:UserService , private router:Router) { }
 
@@ -50,18 +66,25 @@ export class IndivualComponent implements OnInit {
 
   createAccount(user){
     this.sendEmail();
+    this.theCode = this.makeRandom(this.lengthOfCode, this.possible);
+    console.log(this.theCode);
+    if(this.sendEmail()){
       this.showCode=true;
+    }
   }
 
+  
   sendEmail(){
+    this.email.to=this.user.email;
     this.userService.sendEmail(this.email).subscribe(data => {
-      
-      console.log("done man");
+      console.log(data);
     })
+    return true;
   }
 
   saveAccount(){
-    if(this.code === '123456'){
+    console.log(this.theCode);
+    if(this.code === this.theCode){
       this.showCode = false ;
       this.userService.createUser(this.user).subscribe(data => {
         this.user = data;

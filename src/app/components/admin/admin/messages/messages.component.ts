@@ -15,10 +15,7 @@ export class MessagesComponent implements OnInit {
   constructor(private messageService:MessageService , private router:Router) { }
 
   ngOnInit(): void {
-    this.getAll();
-    setTimeout(() => {
-      location.reload();
-    }, 10000);
+      this.getAll();
   }
   getAll(){
       this.messageService.getAll().subscribe(data => {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+declare var L : any;
 @Component({
   selector: 'app-pricing',
   templateUrl: './pricing.component.html',
@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PricingComponent implements OnInit {
 
-  number:number;
-  from:string="tanta" ;
-  to:string="cairo" ;
+  private map: any;
+  
+  number:number = 0;
+  from:string ;
+  to:string;
   dist:number  ;
   show:boolean=false;
   wait:boolean = false;
@@ -44,13 +46,38 @@ export class PricingComponent implements OnInit {
     }
 }
 
-
-
-
-
   constructor() { }
 
   ngOnInit(): void {
+
+      this.getDirection();
+    
   }
+
+  getDirection(){
+    L.mapquest.key = 'lYrP4vF3Uk5zgTiGGuEzQGwGIVDGuy24';
+    this.map = L.mapquest.map('map', {
+        center:{lat:30.06 , lng:31.25},
+        layers:L.mapquest.tileLayer('map'),
+        zoom: 13
+      });
+  L.mapquest.directions().route({
+    start: 'tanta',
+    end: 'cairo'
+  });
+      
+  }
+  // getMyRoad(){
+  //   L.mapquest.key = 'lYrP4vF3Uk5zgTiGGuEzQGwGIVDGuy24';
+  //   this.map = L.mapquest.map('map', {
+  //       center:{lat:30.06 , lng:31.25},
+  //       layers:L.mapquest.tileLayer('map'),
+  //       zoom: 13
+  //     });
+  //   L.mapquest.directions().route({
+  //     start: 'tanta',
+  //     end: 'cairo'
+  //   });
+  // }
 
 }

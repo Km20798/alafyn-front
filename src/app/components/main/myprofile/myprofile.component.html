@@ -1,0 +1,51 @@
+<app-main-nav></app-main-nav>
+<div class="page">
+  <div class="image">
+    <img [src]="reterviedImage" *ngIf="reterviedImage" alt="">
+    <img src="../../../../assets/img/person.jpg" *ngIf="!reterviedImage" alt="">
+    <button class="btn1 edit" *ngIf="!reterviedImage" (click)="importImage()"><i class="fa fa-edit"></i></button>
+    <div class="form" *ngIf="imp">
+      <div class="container row">
+  <div class="col-md-6">
+    <input type="file" (change)="onFileChanged($event)">
+  </div>
+  <div class="col-md-6">
+    <input type="button" class="btn btn-success" value="Upload" (click)="upload()">
+  </div>
+</div>
+    </div>
+  </div>
+  <div class="data">
+    <div class="work">
+      
+    </div>
+    <h2>{{user.username}}</h2>
+    <div class="info">
+      
+      <table class="table table-striped table-dark">
+        
+        <tr class="dark">
+          <th>Email</th>
+          <td>{{user.email}}</td>
+        </tr>
+        <tr class="light">
+          <th>Phone</th>
+          <td>{{user.phone}}</td>
+        </tr>
+        <tr class="red">
+          <th>City</th>
+          <td>{{user.address.city}}</td>
+        </tr>
+        <tr class="green">
+          <th>Country</th>
+          <td>{{user.address.country}}</td>
+        </tr>
+        <tr>
+          <th>FullAddress</th>
+          <td>{{user.address.addressDet}}</td>
+        </tr>
+      </table>
+      <p>if you want update your data please <a routerLink="/updatedata"><button class="btn btn-success">click here</button></a></p>
+    </div>  
+  </div>
+</div>

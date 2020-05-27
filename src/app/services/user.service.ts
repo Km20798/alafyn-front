@@ -37,4 +37,9 @@ export class UserService {
   sendEmail(email:Email){
     return  this.http.post<Email>(`http://localhost:8081/sendMail` , email );
   }
+
+  getStoreToWork(city:string){
+    return this.http.get<User[]>(`http://localhost:8081/users/store/${city}`);
+  }
+
 }

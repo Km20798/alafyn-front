@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Message } from 'src/app/models/message.model';
 import { MessageService } from 'src/app/services/message.service';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-content',
@@ -23,7 +22,7 @@ export class ContentComponent implements OnInit {
 
   };
   message:string;
-
+  okay:boolean=false;
 
 
   constructor(private service:MessageService , private router:Router) { }
@@ -31,13 +30,16 @@ export class ContentComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  Warn() {
+    alert ("Your Message is sent successfully");
+ }
+
   onSubmit(){
-   
     this.service.addMessage(this.mes).subscribe(data => {
-      this.message='';
-      this.mes.message=null;
-      this.mes.username=null;
-      this.mes.email=null;
+      this.Warn();
+      this.mes.username='';
+      this.mes.email='';
+      this.mes.message='';
     }, error => {
       this.message = 'please Enter your data !';
     });

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
+import { OrderService } from 'src/app/services/order.service';
+import { Order } from 'src/app/models/Order.model';
 
 @Component({
   selector: 'app-my-account',
@@ -23,11 +25,25 @@ export class MyAccountComponent implements OnInit {
     role:'',
     active:0
   }
-  constructor(private userService:UserService) { }
+  from:Date ;
+  to:Date ;
+  orders:Order[];
+  price:number=0;
+
+  constructor(private userService:UserService , private orderService:OrderService) { }
 
   ngOnInit(): void {
     this.userService.getUser(sessionStorage.getItem("user")).subscribe(data => {
       this.user = data;
+    })
+  }
+
+  request(){
+    this.orderService.findByTimes(sessionStorage.getItem("user"),this.from , this.to).subscribe(data => {
+      this.orders = data;
+      data.forEach(element => {
+        this.price += element.price;
+      });
     })
   }
 

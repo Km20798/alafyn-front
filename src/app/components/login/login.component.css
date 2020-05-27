@@ -28,7 +28,7 @@ hr{
 
 	position: fixed;
 	top: 35%;
-	left: 20%;
+	left: 24%;
 	width: 60%;
 	background-color: white;
 	height: 60%;
@@ -38,11 +38,9 @@ hr{
 	text-align: center;
 }
 .form-group{
-	margin-left: 20%;
 	margin-top: 10px;
 	width: 60%;
 	margin-bottom: 5%;
-	padding-left: 5%;
 }
 .user , .pass{
 	display: flex;
@@ -50,6 +48,13 @@ hr{
 	border: 1px solid gray;
 	border-radius: 4px;
 	text-align: center;
+}
+.user , .pass{
+		margin-left: 20%;
+    margin-top: 10px;
+    width: 100%;
+    margin-bottom: 5%;
+    padding-left: 5%;
 }
 .message{
 	background-color: tomato;
@@ -96,6 +101,16 @@ a{
 		text-align: center;
 		width: 100%;
 }
+.no-border{
+	border: 0;
+    box-shadow: none;
+}
 img{
 	width: 27%;
+}
+ .lin{
+	margin-left: -15%;
+}
+.btn , .button1{
+	margin-left: 20%;
 }

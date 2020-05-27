@@ -1,6 +1,11 @@
 
 nav{
   display: flex;
+  background-color: white;
+}
+.nav{
+  background-color: white;
+  height: 15%;
 }
 .logo{
   width: 100%;
@@ -8,6 +13,9 @@ nav{
 }
 .logo img{
   width: 100px;
+}
+.man{
+  width: 5%;
 }
 .info{
   display: flex;

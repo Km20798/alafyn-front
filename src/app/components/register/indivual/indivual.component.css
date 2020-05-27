@@ -35,7 +35,6 @@ img{
 }
 .account p {
   text-align: center;
-  border: 1px solid #171769;
   width: 30%;
   border-radius: 100px;
   border-radius: 100%;
@@ -114,14 +113,14 @@ input[type="text"]{
   color: red;
 }
 
-
-
+.no-border{
+    box-shadow: none;
+}
 .account1{
   margin-right: 20%;
 }
 .account1 p {
   text-align: center;
-  border: 1px solid #171769;
   width: 30%;
   border-radius: 100px;
   border-radius: 100%;

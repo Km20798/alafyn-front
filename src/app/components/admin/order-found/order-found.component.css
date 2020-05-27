@@ -1,0 +1,29 @@
+.page{
+  display: flex;
+}
+.side{
+  width: 20%;
+}
+.work{
+  display: flex;
+}
+img{
+  position: fixed;
+    top: 30%;
+    margin-left: 5%;
+    width: 30%;
+    box-shadow: 5px 5px gainsboro;
+}
+.data{
+  position: fixed;
+  top: 20%;
+  left: 60%;
+}
+h2{
+  text-align: left;
+  margin-bottom: 5%;
+  color: crimson;
+}
+table{
+  text-align: center;
+}

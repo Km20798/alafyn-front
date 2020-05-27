@@ -1,0 +1,67 @@
+.page{
+  display: flex;
+}
+.data{
+  margin-left: 10%;
+  margin-top: 2%;
+  width: 80%;
+}
+.table-user{
+  width: 100%;
+  margin: 0% 2%;
+  background-color: teal;
+  border-radius: 10px;
+  border: none;
+  padding-bottom: 5%;
+  margin-right: 2%;
+}
+.bb{
+  position: fixed;
+  top: 17%;
+  right: 10%;
+  background: none;
+  border: none;
+}
+
+.table-user h2{
+  text-align: center;
+  color: white;
+  margin-bottom: 3%;
+  border-radius: 10px;
+}
+table{
+  width: 90%;
+  margin-left: 5%;
+}
+tr{
+  width: 100%;
+}
+
+thead{
+  height: 80px;
+  background-color: aquamarine;
+  text-align: center;
+  
+}
+img{
+  width: 25%;
+  border-radius: 50px;
+}
+.button{
+  background: none;
+  border: none;
+  color: black;
+}
+tr{
+  border-bottom: .5px solid gray;
+  
+}
+
+tbody{
+  background-color: white;
+  color: black
+}
+
+table th,table td{
+  width: 10%;
+}

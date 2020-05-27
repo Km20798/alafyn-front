@@ -1,0 +1,22 @@
+.page{
+  background-color: #040471;
+}
+.work{
+  background-color: white;
+  margin-left: 5%;
+  width: 90%;
+  height: 100vh;
+}
+.working{
+  margin-top: 1%;
+  background-color: #e2e8d5;
+  border: 1px solid #c7ceb8;
+}
+h5{
+  padding: 1%;
+}
+.not{
+  margin-top: 1%;
+  text-align: center;
+  font-size: 20px;
+}

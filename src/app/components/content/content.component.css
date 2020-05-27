@@ -1,81 +1,71 @@
-iframe{
-  margin-top: 10%;
-}
+
 .row{
   margin-right: 0px;
 }
-.contactUs{
-  margin-left: 10%;
+.div{
+  text-align: center;
   margin-top: 5%;
 }
-.contactUs h2{
-  color: #172752;
-  font-weight: bold;
+ul{
+  margin-top: 5%;
   text-align: center;
-  margin-left: 37%;
-}
-.contact{
+  margin-left: 10%;
+  width: 80%;
   display: flex;
-  margin-top: 100px;
 }
-.marker , .phone {
-    width: 100%;
-    padding: 10px;
-    text-align: center;
-    margin-right: 80px;
+li{
+  list-style: none;
 }
-.mail{
-  width: 100%;
-  padding: 10px;
-  text-align: center;
-  margin-right: 0px;
+li{
+  width: 30%;
 }
- .ic{
-    font-size: 60px;
-    background-color: #080338;
-    padding: 10px;
+i{
+  border-radius: 6px;
+    font-size: 50px;
     color: white;
-    width: 100px;
-    height: 100px;
-    text-align: center;
-    border-radius: 10px;
-    margin-bottom: 20px;
+
+    background: #172752;
+    padding: 10px;
 }
 .sendMessage{
-  height: 100%;
-  width: 60%;
   margin-left: 20%;
-  padding: 5%;
-  display: flex;
+  width: 60%;
+  margin-top: 5%;
+  margin-bottom: 7%;
 }
-.inputfield{
-  margin-bottom: 40px;
-  display: flex;
+.usena{
+  width: 48%;
+    margin-right: 2%;
 }
-.inputfield input{
-  margin-right: 50px;
-  width: 17em;
-  height: 3em;
-  border-radius: 5px;
-  border: 1px solid gray;
-  padding-left: 10px;
-}
-.mess{
-  margin-bottom: 40px;
+input{
+  height: 50px;
 }
 textarea{
-  padding-left: 10px;
-  border-radius: 10px;
-  width: 93%;
-  height: 17em;
+  height: 300px;
 }
-button{
-  width: 93%;
+.no-border{
+    box-shadow: none;
 }
-table{
-  width: 70%;
-  margin-left: 20%;
+.inputfield{
+  display: flex;
+  width: 100%;
+}
+.inputfield input {
+  width: 100%;
 }
 p{
   color: red;
+}
+button{
+  width: 100%;
+}
+dialog{
+  position: fixed;
+    width: 30%;
+    background-color: thistle;
+    color: black;
+    margin-left: 40%;
+    top: 30%;
+    text-align: center;
+    border-radius: 10px;
 }

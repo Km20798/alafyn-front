@@ -4,7 +4,7 @@
         <img src="../../../../assets/img/logo.png" alt="logo">
         
       </div>
-      <div class="details" >
+      <div class="details" *ngIf="!page">
         <div class="account">
           Account Details
           <p>1</p>
@@ -14,12 +14,22 @@
           <p>2</p>
         </div>
       </div>
+      <div class="details" *ngIf="page">
+        <div class="account1">
+          Account Details
+          <p>1</p>
+        </div>
+        <div class="del1">
+          Delivery Details
+          <p>2</p>
+        </div>
+      </div>
       <div class="form">
         <form #userForm="ngForm" (ngSubmit)="createAccount(userForm)">
           <div *ngIf="!page">
             <div class="form-group">
               <label>Name</label>
-              <input type="text" name="username" [(ngModel)]="user.username" #userUsername="ngModel" class="form-controll"
+              <input type="text" name="username" [(ngModel)]="user.username" #userUsername="ngModel" class="form-controll no-border"
               [ngClass]="{'is-invalid': userUsername.errors && userUsername.touched}" required minlength="3">
               <div class="invalid-feedback" [hidden]="!userUsername.errors?.required">
                 <p>username is required</p>

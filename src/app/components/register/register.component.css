@@ -5,12 +5,20 @@
 }
 .logo{
   position: relative;
+  text-align: center;
   top: 5%;
   color: white;
 }
-h3{
-  position: relative;
-  /* font-size: 20px; */
+ul{
+  display: flex;
+  text-align: center;
+  margin-left: 20%;
+  list-style: none;
+  width: 60%;
+}
+li{
+  text-align: left;
+  width: 50%;
 }
 .reg{
   display: flex;

@@ -1,0 +1,51 @@
+.page{
+  background-color: #00a1ff;
+  height: 100vh;
+}
+.work{
+  width: 100%;
+  height: 80vh;
+  background-color: #336560;
+  border-bottom-left-radius: 70% ;
+}
+.form{
+  position: fixed;
+  top: 40%;
+  left: 30%;
+  width: 100%;
+}
+input{
+  width: 80%;
+  height: 50px;
+  margin-left: 5%;
+  border: none;
+  text-align: center;
+}
+
+.username , .email , .phone , .password , .city , .country , .full , .btnbtn{
+  padding-left: 2%;
+  border: 1px solid white;
+  border-radius: 50px;
+  background-color: white;
+  width: 60%;
+} 
+.btnbtn{
+  padding-left: 0;
+  border: green;
+}
+p{
+  text-align: left;
+  margin-left: 5%;
+  color: red;
+}
+button{
+  background-color: white;
+  border: none;
+}
+.btnbtn button{
+  background-color: green;
+  width: 100%;
+  height: 40px;
+  border-radius: 50px
+  
+}

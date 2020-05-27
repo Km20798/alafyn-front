@@ -1,0 +1,63 @@
+<app-admin-nav></app-admin-nav>
+<div class="page">
+  <div class="work">
+    <div class="img">
+      <img [src]="reterviedImage" alt="">
+    </div>
+    <div class="data">
+      <h2>{{order.code}}</h2>
+      <table>
+        <tr>
+          <th>Delivery Method</th>
+          <td>{{order.delivery_method}}</td>
+        </tr>
+        <tr>
+          <th>Vehicle Type</th>
+          <td>{{order.vehicle_type}}</td>
+        </tr>
+        <tr>
+          <th>Pickup Location</th>
+          <td>{{order.pickup_Location}}</td>
+        </tr>
+        <tr>
+          <th>Mobile</th>
+          <td>{{order.mobile}}</td>
+        </tr>
+        <tr>
+          <th>Discription</th>
+          <td>{{order.discription}}</td>
+        </tr>
+        <tr>
+          <th>Client Name</th>
+          <td>{{order.client_name}}</td>
+        </tr>
+        <tr>
+          <th>Address</th>
+          <td>{{order.address}}</td>
+        </tr>
+        <tr>
+          <th>Price</th>
+          <td>{{order.price}}</td>
+        </tr>
+        
+        <tr>
+          <th>Payment Method</th>
+          <td>{{order.payment_method}}</td>
+        </tr>
+        <tr>
+          <th>Time</th>
+          <td>{{order.time}}</td>
+        </tr>
+        <tr>
+          <th>user</th>
+          <td>{{order.user.email}}</td>
+        </tr>
+        <br>
+        <tr>
+          <td></td>
+          <td><button class="btn btn-success">Okay</button></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

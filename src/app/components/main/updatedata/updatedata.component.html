@@ -1,0 +1,56 @@
+
+<div class="page">
+  <app-main-nav style="background-color: white;"></app-main-nav>
+  <div class="work">
+   <div class="form">
+     <form (ngSubmit)="updateUser()">
+      <div class="email" *ngIf="num === 1">
+        <i class="fa fa-envelope-square"></i>
+      <input type="text" name="email" (click)="show()" [(ngModel)]="user.email" readonly placeholder="Enter your Email please!">
+        <button (click)="getNext()"><i class="fa fa-angle-double-right"></i></button>
+       </div>
+       <p *ngIf="k === 1">you can't chanage Email Address</p>
+       <div class="username" *ngIf="num === 2">
+        <i class="fa fa-user"></i>
+         <input type="text" name="username" [(ngModel)]="user.username" placeholder="Enter your Username please!">
+         <button [disabled]="!user.username" (click)="getNext()"><i class="fa fa-angle-double-right"></i></button>
+       </div>
+       <p *ngIf="!user.username">Please Enter Userame</p>
+       <div class="phone" *ngIf="num === 3">
+        <i class="fa fa-phone"></i>
+        <input type="text" name="phone" [(ngModel)]="user.phone" placeholder="Enter your Phone please!">
+        <button [disabled]="!user.phone" (click)="getNext()"><i class="fa fa-angle-double-right"></i></button>
+       </div>
+       <p *ngIf="!user.phone">Please Enter Phone number</p>
+       <div class="password" *ngIf="num === 4">
+        <i class="fa fa-lock"></i>
+        <input type="password" name="password" [(ngModel)]="user.password" placeholder="Enter your Password please!">
+        <button [disabled]="!user.password" (click)="getNext()"><i class="fa fa-angle-double-right"></i></button>
+      </div>
+      <p *ngIf="!user.password">Please Enter Password</p>
+      <div class="city" *ngIf="num === 5">
+        <i class="fa fa-address-book"></i>
+        <input type="text" name="city" [(ngModel)]="user.address.city" placeholder="Enter your City please!">
+        <button [disabled]="!user.address.city" (click)="getNext()"><i class="fa fa-angle-double-right"></i></button>
+      </div>
+      <p *ngIf="!user.address.city">Please Enter City</p>
+      <div class="country" *ngIf="num === 6">
+        <i class="fa fa-address-book"></i>
+        <input type="text" name="country" [(ngModel)]="user.address.country" placeholder="Enter your Country please!">
+        <button [disabled]="!user.address.country" (click)="getNext()"><i class="fa fa-angle-double-right"></i></button>
+      </div>
+      <p *ngIf="!user.address.country">Please Enter Country</p>
+      <div class="full" *ngIf="num === 7">
+        <i class="fa fa-address-book"></i>
+        <input type="text" name="addressDet" [(ngModel)]="user.address.addressDet" placeholder="Enter your fullAddress please!">
+        <button [disabled]="!user.address.addressDet" (click)="getNext()"><i class="fa fa-angle-double-right"></i></button>
+      </div>
+      <p *ngIf="!user.address.addressDet">Please Enter fullAddress</p>
+      <div class="btnbtn" *ngIf="num === 8">
+        <button class="btn btn-success" type="submit">Update</button>
+      </div>
+     </form>
+   </div> 
+   
+  </div>
+</div>
