@@ -11,7 +11,9 @@ import { Router } from '@angular/router';
 })
 export class MyOrderComponent implements OnInit {
 
-  orders:Order[] ;
+  doneOrders:Order[] ;
+  waitOrders:Order[] ;
+  newOrders:Order[] ;
   order:Order={
     id:null,
     delivery_method:'',
@@ -25,6 +27,10 @@ export class MyOrderComponent implements OnInit {
     code:null ,
     payment_method:'',
     time:null,
+    car:null,
+    ok:false,
+    company:'',
+    done:false,
     user:null
   };
   show:boolean=false;
@@ -36,7 +42,9 @@ export class MyOrderComponent implements OnInit {
   base64Data:any;
   retriveRespons:any;
   imp:boolean=false;
-
+  done:boolean=true;
+  wait:boolean=false;
+  new:boolean=false;
   constructor(private orderService:OrderService , private http:HttpClient , private router:Router) { }
 
   ngOnInit(): void {
@@ -69,7 +77,18 @@ export class MyOrderComponent implements OnInit {
 
   getAllOrder(){
     this.orderService.findByUser(sessionStorage.getItem("user")).subscribe(data => {
-      this.orders = data;
+      this.newOrders = [];
+      this.doneOrders = [];
+      this.waitOrders = [];
+      data.forEach(element => {
+        if(element.ok === false){
+          this.newOrders.unshift(element);
+        }else if(element.ok === true && element.done === false){
+          this.waitOrders.unshift(element);
+        }else if(element.ok === true , element.done === true){
+          this.doneOrders.unshift(element);
+        }
+      });
     });
   }
 
@@ -82,4 +101,29 @@ export class MyOrderComponent implements OnInit {
     });
   }
 
+  removeImage(id:number , name:string){
+
+    this.http.delete(`http://localhost:8081/deleteImage/${id}/${name}`).subscribe(data =>{});
+  }
+
+  remove(id:number , name:string){
+    this.orderService.deleteOrder(id).subscribe(data => {this.getAllOrder();});
+    this.removeImage(id , name+'jpg');
+  }
+
+  getDone(){
+    this.done=true;
+    this.new=false;
+    this.wait=false;
+  }
+  getWait(){
+    this.done=false;
+    this.new=false;
+    this.wait=true;
+  }
+  getNew(){
+    this.done=false;
+    this.new=true;
+    this.wait=false;
+  }
 }

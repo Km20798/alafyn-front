@@ -44,6 +44,11 @@ export class MyprofileComponent implements OnInit {
   }
 
   public upload(){
+
+    if(this.reterviedImage !== null){
+      this.http.delete(`http://localhost:8081/deleteImage/${this.user.email}`).subscribe(data => {});
+    }
+
     const uploadImageData = new FormData();
     uploadImageData.append('imageFile' , this.selectedFile , this.user.email);
     this.http.post(`http://localhost:8081/upload` , uploadImageData , {observe:'response'}).subscribe(data => {

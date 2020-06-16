@@ -99,3 +99,29 @@ img{
   margin-top: 5%;
   
 }
+.orderworks{
+  background-color: gray;
+  height: 80px;
+}
+.done , .accepted , .wait{
+  width: 33%;
+  float: left;
+  text-align: center;
+  height: 100%;
+}
+.done button ,.accepted button , .wait button{
+  background: none;
+  border: none;
+  color: white;
+  font-weight: bold;
+  height: 100%;
+} 
+button:hover{
+  background-color: tomato;
+}
+.orderworks button:focus{
+  outline: none;
+}
+.act{
+  border-bottom: 5px solid #111161;
+}

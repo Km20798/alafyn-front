@@ -18,6 +18,7 @@ footer{
     margin-left: 7%;
     margin-bottom: 2%;
 }
+a:focus{outline: none;}
 .btns{
   display: flex;
 }

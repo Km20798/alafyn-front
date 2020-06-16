@@ -13,5 +13,9 @@ export class Order{
   code:number;
   payment_method:string;
   time:Date;
+  car:number;
+  ok:boolean;
+  company?:string;
+  done:boolean;
   user:User;
 }

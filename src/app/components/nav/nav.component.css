@@ -8,5 +8,8 @@ li{
   margin-right: 3%;
 }
 button{
-  width:100px;
+  width: 130px;
+  border: none;
+  border-radius: 9px;
 }
+a:focus{outline: none;}

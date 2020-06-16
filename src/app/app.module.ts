@@ -7,7 +7,8 @@ import { AngularFireDatabaseModule }from '@angular/fire/database';
 import { environment }from '../environments/environment';
 import { SliderModule } from 'angular-image-slider';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';  
-
+import { NgImageSliderModule } from 'ng-image-slider';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -42,7 +43,22 @@ import { NotificationsComponent } from './components/main/notifications/notifica
 import { OrdersComponent } from './components/admin/admin/orders/orders.component';
 import { MyOrderComponent } from './components/main/my-order/my-order.component';
 import { OrderFoundComponent } from './components/admin/order-found/order-found.component';
-import { SliderComponent } from 'angular-image-slider/src/app/slider/slider.component';
+import { StoreUserComponent } from './components/store-user/store-user.component';
+import { StoreNavComponent } from './components/store-user/store-nav/store-nav.component';
+import { GetuserComponent } from './components/admin/admin/getuser/getuser.component';
+import { AdminsComponent } from './components/admin/admin/admins/admins.component';
+import { StoresComponent } from './components/admin/admin/stores/stores.component';
+import { OrderNavComponent } from './components/admin/admin/orders/order-nav/order-nav.component';
+import { WaitingComponent } from './components/admin/admin/orders/waiting/waiting.component';
+import { StoreCarComponent } from './components/store-user/store-car/store-car.component';
+import { MycarComponent } from './components/store-user/store-car/mycar/mycar.component';
+import { AddCarComponent } from './components/store-user/store-car/add-car/add-car.component';
+import { EditCarComponent } from './components/store-user/store-car/edit-car/edit-car.component';
+import { StoreOrdersComponent } from './components/store-user/store-orders/store-orders.component';
+import { CompanyComponent } from './components/admin/order-found/company/company.component';
+import { FindOrderComponent } from './components/store-user/store-orders/find-order/find-order.component';
+import { StoreProfileComponent } from './components/store-user/store-profile/store-profile.component';
+import { FinishedOrderComponent } from './components/admin/admin/orders/finished-order/finished-order.component';
 
 @NgModule({
   declarations: [
@@ -75,17 +91,35 @@ import { SliderComponent } from 'angular-image-slider/src/app/slider/slider.comp
     NotificationsComponent,
     OrdersComponent,
     MyOrderComponent,
-    OrderFoundComponent
+    OrderFoundComponent,
+    StoreUserComponent,
+    StoreNavComponent,
+    GetuserComponent,
+    AdminsComponent,
+    StoresComponent,
+    OrderNavComponent,
+    WaitingComponent,
+    StoreCarComponent,
+    MycarComponent,
+    AddCarComponent,
+    EditCarComponent,
+    StoreOrdersComponent,
+    CompanyComponent,
+    FindOrderComponent,
+    StoreProfileComponent,
+    FinishedOrderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     SliderModule,
+    NgImageSliderModule,
     FormsModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment),
     AngularFireDatabaseModule,
+    CarouselModule ,
     AgmCoreModule.forRoot({
       apiKey:'AIzaSyBKVyP3w_ayBOQUsEyzOMJI6k-AlQxG0Ic'
     })  

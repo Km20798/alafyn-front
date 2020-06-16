@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class OrdersComponent implements OnInit {
 
   orders:Order[];
+  code:number;
 
   constructor(private orderService:OrderService , private router:Router) { }
 
@@ -19,9 +20,23 @@ export class OrdersComponent implements OnInit {
   }
 
   getAllOrders(){
+    this.orders = [];
     this.orderService.GetAllOrders().subscribe(data => {
-      this.orders = data;
+      data.forEach(element => {
+        if(element.ok  === false){
+          this.orders.unshift(element);
+        }
+      });
     })
+  }
+
+  findOrderByCode(){
+    this.orderService.findByCode(sessionStorage.getItem("user"),this.code).subscribe(data => {
+      sessionStorage.setItem("code" , this.code+'');
+      this.router.navigate([`/search/${data.code}`]);
+    },error => {
+      alert("No Order With "+ this.code );
+    });
   }
   
   findOrder(code:number){

@@ -1,0 +1,32 @@
+.mar{
+  margin-top: 5%;
+}
+.button{
+  width: 50%;
+  margin-left: 25%;
+  margin-bottom: 2%;
+} 
+.table{
+  width: 80%;
+  margin-left: 10%;
+  background-color: #0bc2f3;
+  text-align: center;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  border-radius: 10px;
+}
+table{
+  width: 90%;
+  margin-left: 5%;
+  background-color: #d0d2cf;
+  border-radius: 5px;
+  border: none;
+}
+table thead th{
+  border: none;
+  color: white;
+}
+.info{
+  background: none;
+  border: none;
+}

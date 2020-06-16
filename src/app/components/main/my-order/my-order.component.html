@@ -24,23 +24,68 @@
      </div>
    </div>
   </div>
+  <div class="orderworks">
+    <div class="done" [ngClass]="{act: done}">
+      <button (click)="getDone()">Finished Orders</button>
+    </div>
+    <div class="accepted" [ngClass]="{act: wait}">
+      <button (click)="getWait()">Accepted Orders</button>
+    </div>
+    <div class="wait" [ngClass]="{act: new}">
+      <button (click)="getNew()">Waiting Orders</button>
+    </div>
+  </div>
   <button class="btn btn-success button" (click)="click()" *ngIf="show"><i class="fa fa-arrow-left"></i></button>
-  <table class="table" *ngIf="!show">
-    <tr>
-      <th>delivery_method</th>
-      <th>Code</th>
-      <th>Description</th>
-      <th>Date</th>
-      <th>Ditalies</th>
-    </tr>
-    <tr *ngFor="let order of orders">
-      <td>{{order.delivery_method}}</td>
-      <td>{{order.code}}</td>
-      <td>{{order.discription}}</td>
-      <td>{{order.time}}</td>
-      <td><button (click)="getOrder(order.code)" class="btn btn-success">Detailes</button></td>
-    </tr>
-  </table>
+  <div class="table" *ngIf="!show">
+    <table class="table" *ngIf="done">
+      <tr>
+        <th>delivery_method</th>
+        <th>Code</th>
+        <th>Date</th>
+        <th>Ditalies</th>
+        
+      </tr>
+      <tr *ngFor="let order of doneOrders">
+        <td>{{order.delivery_method}}</td>
+        <td>{{order.code}}</td>
+        <td>{{order.time}}</td>
+        <td><button (click)="getOrder(order.code)" class="btn btn-success"><i class="fa fa-info-circle"></i></button></td>
+        <td *ngIf="order.ok === false"><button class="btn btn-danger" (click)="remove(order.id , order.code)"><i class="fa fa-remove"></i></button></td>
+      </tr>
+    </table>
+    <table class="table" *ngIf="wait">
+      <tr>
+        <th>delivery_method</th>
+        <th>Code</th>
+        <th>Date</th>
+        <th>Ditalies</th>
+        
+      </tr>
+      <tr *ngFor="let order of waitOrders">
+        <td>{{order.delivery_method}}</td>
+        <td>{{order.code}}</td>
+        <td>{{order.time}}</td>
+        <td><button (click)="getOrder(order.code)" class="btn btn-success"><i class="fa fa-info-circle"></i></button></td>
+        <td *ngIf="order.ok === false"><button class="btn btn-danger" (click)="remove(order.id , order.code)"><i class="fa fa-remove"></i></button></td>
+      </tr>
+    </table>
+    <table class="table" *ngIf="new">
+      <tr>
+        <th>delivery_method</th>
+        <th>Code</th>
+        <th>Date</th>
+        <th>Ditalies</th>
+      </tr>
+      <tr *ngFor="let order of newOrders">
+        <td>{{order.delivery_method}}</td>
+        <td>{{order.code}}</td>
+        <td>{{order.time}}</td>
+        <td><button (click)="getOrder(order.code)" class="btn btn-success"><i class="fa fa-info-circle"></i></button></td>
+        <td *ngIf="order.ok === false"><button class="btn btn-danger" (click)="remove(order.id , order.code)"><i class="fa fa-remove"></i></button></td>
+      </tr>
+    </table>
+  </div>
+  
 
   <div class="show" *ngIf="show">
   <div class="img">
@@ -80,7 +125,7 @@
         </tr>
         <tr>
           <th>Price</th>
-          <td>{{order.price}}</td>
+          <td>{{order.price}} L.E</td>
         </tr>
         
         <tr>
@@ -91,7 +136,10 @@
           <th>Time</th>
           <td>{{order.time}}</td>
         </tr>
-        
+        <tr>
+          <th>Number of Cars</th>
+          <td>{{order.car}}</td>
+        </tr>
       </table>
   </div>
   </div>

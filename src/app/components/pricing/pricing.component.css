@@ -5,8 +5,9 @@
 .left{
   /* background-color: red; */
   width: 100%;
-  height: 92vh;
+  height: 120vh;
 }
+
 .right{
   background-color: #f2f2f2;
   width: 100%;
@@ -116,4 +117,14 @@ h1{
   color: crimson;
   font-style: italic;
   font-family: monospace;
+}
+
+#locationField, #controls {
+  width: 480px;
+}
+#autocomplete {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 99%;
 }

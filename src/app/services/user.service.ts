@@ -22,8 +22,12 @@ export class UserService {
     return this.http.get<User>(`http://localhost:8081/users/${email}` );
   }
 
-  deleteUser(id:number){
-    return this.http.delete(`http://localhost:8081/users/${id}` );
+  getUserByPhone(phone:string){
+    return this.http.get<User>(`http://localhost:8081/users/${phone}` );
+  }
+
+  deleteUser(email:string){
+    return this.http.delete(`http://localhost:8081/users/${email}` );
   }
 
   getAll(){
@@ -38,8 +42,8 @@ export class UserService {
     return  this.http.post<Email>(`http://localhost:8081/sendMail` , email );
   }
 
-  getStoreToWork(city:string){
-    return this.http.get<User[]>(`http://localhost:8081/users/store/${city}`);
+  getStoreToWork(country:string){
+    return this.http.get<User[]>(`http://localhost:8081/users/store/${country}`);
   }
 
 }

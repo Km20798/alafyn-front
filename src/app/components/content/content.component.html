@@ -44,7 +44,9 @@
           <div class="form-group" style="width: 50%;">
             <input type="text" class="form-control no-border" name="email" [(ngModel)]="mes.email" 
              #messageEmail="ngModel" [ngClass]="{'is-invalid': messageEmail.errors && messageEmail.touched}" placeholder="Emali *" required pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"> 
-             
+             <div class="invalid-feedback" [hidden]="!messageEmail.errors?.required" > 
+              <p>Email is Required</p>
+            </div>
             <div class="invalid-feedback" [hidden]="!messageEmail.errors?.pattern" > 
               <p>Email is Invalid</p>
             </div>
@@ -52,7 +54,13 @@
         </div>
         <div class="form-group">
           <textarea name="message" class="form-control no-border" [(ngModel)]="mes.message" placeholder="Message *"
-            #messageMessage="ngModel" [ngClass]="{'is-invalid': messageMessage.errors && messageMessage.touched}"></textarea>
+            #messageMessage="ngModel" [ngClass]="{'is-invalid': messageMessage.errors && messageMessage.touched}" minlength="10" required></textarea>
+            <div class="invalid-feedback" [hidden]="!messageMessage.errors?.required" > 
+              <p>Message is Required</p>
+            </div>
+            <div class="invalid-feedback" [hidden]="!messageMessage.errors?.minlength" > 
+              <p>Message Lenght must be at least 10 charachers</p>
+            </div>
         </div>
       
         <div class="form-group">

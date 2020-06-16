@@ -1,10 +1,16 @@
 <app-admin-nav></app-admin-nav>
 <div class="page">
+
   <div class="data">
-<div class="container">
+    <app-order-nav></app-order-nav>
+  <div class="container">
+  <div class="form-groub form">
+    <input type="search" name="code" [(ngModel)]="code" id="" class="form-control" placeholder="Enter Code">
+    <button class="bnt btn-success" [disabled]="!code" (click)="findOrderByCode()"><i class="fa fa-search"></i></button>
+  </div>
   <button class="btn btn-success bb" (click)="getAllOrders()"><i class="fa fa-reply"></i></button>
   <div class="table-user">
-    <h2>Orders</h2>
+    <h2>New Orders</h2>
       <table>
         <thead>
           <tr>

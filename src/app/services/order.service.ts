@@ -31,4 +31,16 @@ export class OrderService {
     return this.http.get<Order[]>(`http://localhost:8081/orders/${email}/${from}/${to}`);
   }
 
+  updateOrder(id:number , order:Order){
+    return this.http.put<Order>(`http://localhost:8081/orders/${id}`, order);
+  }
+
+  deleteOrder(id:number){
+    return this.http.delete(`http://localhost:8081/orders/${id}`);
+  }
+
+  getAllOrderByCampany(email:string){
+    return this.http.get<Order[]>(`http://localhost:8081/orders/stores/${email}`);
+  }
+
 }

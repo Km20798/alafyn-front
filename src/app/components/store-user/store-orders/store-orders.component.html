@@ -1,0 +1,45 @@
+<app-store-nav></app-store-nav>
+<div class="btns">
+  <button class="left" (click)="getDone()">GetAllOrder</button>
+  <button class="right" (click)="getWaiting()">New Order</button>
+</div>
+<div class="mar" *ngIf="done">
+  <div class="table" >
+    <table>
+      <thead>
+        <tr>
+          <th>Order Number</th>
+          <th>Customer Phone</th>
+          <th>detailes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td class="code">{{order.code}}</td>
+          <td>{{order.mobile}}</td>
+          <td><button class="info" (click)="getOrder(order.code)"><i class="fa fa-info-circle"></i></button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+  <div class="mar" *ngIf="!done">
+    <div class="table" >
+      <table>
+        <thead>
+          <tr>
+            <th>Order Number</th>
+            <th>Customer Phone</th>
+            <th>detailes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of Orders">
+            <td class="code">{{order.code}}</td>
+            <td>{{order.mobile}}</td>
+            <td><button class="info" (click)="getOrder(order.code)"><i class="fa fa-info-circle"></i></button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>

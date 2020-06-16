@@ -1,0 +1,61 @@
+.mar{
+  margin-top: 5%;
+}
+.button{
+  width: 50%;
+  margin-left: 25%;
+  margin-bottom: 2%;
+} 
+.table{
+  width: 80%;
+  margin-left: 10%;
+  background-color: #0bc2f3;
+  text-align: center;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  border-radius: 10px;
+}
+table{
+  width: 90%;
+  margin-left: 5%;
+  background-color: #d0d2cf;
+  border-radius: 5px;
+  border: none;
+}
+table thead th{
+  border: none;
+  color: white;
+}
+.info{
+  background: none;
+  border: none;
+}
+.btns{
+  margin-left: 10%;
+  width: 80%;
+  margin-top: 2%;
+  height: 50px;
+  border-radius: 10px;
+}
+.left {
+  width: 50%;
+  float: left;
+  background-color: goldenrod;
+  border: none;
+  height: 100%;
+  font-weight: bold;
+  border-radius: 10px;
+}
+.right {
+  width: 50%;
+  float: left;
+  background-color: #7a92e9;
+  border: none;
+  height: 100%;
+  font-weight: bold;
+  border-radius: 10px;
+}
+.code{
+  color: #3310f7;
+  font-weight: bold;
+}

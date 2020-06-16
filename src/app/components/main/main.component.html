@@ -23,10 +23,10 @@
      </div>
    </div>
   </div>
-  <div class="ordernow">
-    <form (ngSubmit)="addOrder()" *ngIf="order.delivery_method !== 'Move Your House'" >
+  <div class="ordernow " [ngClass]="{disabled: showing === true}">
+    <form *ngIf="order.delivery_method !== 'Move Your House'" >
       <div class="form">
-      <div>
+      <div class="left-form">
         <div class="form-group">
           <label for="Delivery method">Delivery method</label>
           <select name="delivery_method" [(ngModel)]="order.delivery_method" id="" class="form-control no-border">
@@ -63,16 +63,10 @@
           <label for="Address">Address</label>
           <input type="text" name="address" [(ngModel)]="order.address" id="" class="form-control no-border" placeholder="Enter a Location of a place">
         </div>
-        <div class="price">
-          <div class="form-group" style="margin-right: 10%;">
-            <label for="Price">Price</label>
-            <input type="text" name="price" [(ngModel)]="order.price" id="" class="form-control no-border" readonly placeholder="Your Price">
-          </div>
           <div class="form-group">
             <label for="Order number">Order number</label>
             <input type="text" name="code" [(ngModel)]="order.code" id="" class="form-control no-border" readonly placeholder="Your Order Number">
           </div>
-        </div>
         <div class="form-group">
           <label for="Delivery method">Payment Method</label>
           <select name="payment_method" [(ngModel)]="order.payment_method" id="" class="form-control no-border">
@@ -88,6 +82,7 @@
     </div>
     <div class="imageOrder">
        <div class="image">
+         <button class="edit"*ngIf="reterviedImage" (click)="showImage()"><i class="fa fa-edit"></i></button>
         <img [src]="reterviedImage" alt="" *ngIf="reterviedImage">
       </div>
         <div class="in" *ngIf="show">
@@ -99,13 +94,13 @@
         </div>
         <div class="form-group" style="text-align:left;">
           <label for="cars">Number Of Cars</label>
-          <input type="number" name="" class="form-control no-border" placeholder="Enter the number of cars that u need" id="">
+          <input type="number" name="car" [(ngModel)]="order.car" class="form-control no-border" placeholder="Enter the number of cars that u need" id="">
         </div>
     </div>  
   </div>
 
   <p>{{myMessage}}</p>
-  <button class="btn btn-success all" type="submit">Order Now</button>
+  <button class="btn btn-success all" (click)="calcPrice()">Order Now</button>
     </form>
     <form class="anthorForm" *ngIf="order.delivery_method === 'Move Your House'">
       <div class="form-group">
@@ -183,6 +178,15 @@
       </div>
       <button class="b">Submit</button>
     </form>
+  </div>
+  <div class="showing" *ngIf="showing">
+    <h6>The Distance between {{order.pickup_Location}} And {{order.address}} is <span>{{dist}}KM</span> </h6> 
+    <h4>The cost of that Order is :-</h4>
+    <h3><span>{{order.price}}L.E</span></h3>
+    <button (click)="addOrder()">Accept</button>
+  </div>
+  <div class="showing" *ngIf="wait">
+    <h3>Waiting please ....</h3>
   </div>
   </div>
 </div>

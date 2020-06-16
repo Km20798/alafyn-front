@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user.model';
 import { OrderService } from 'src/app/services/order.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-admin-nav',
@@ -12,14 +13,42 @@ import { OrderService } from 'src/app/services/order.service';
 })
 export class AdminNavComponent implements OnInit {
 
-  user:User;
+  user:User = {
+    id:null , 
+    username:'',
+    email:'',
+    password:'',
+    phone:'',
+    address:{
+    city:'',
+    country:'',
+    addressDet:''
+    },
+    role:"ROLE_USER",
+    active:0
+  }
   code:number=null;
+  reterviedImage:any;
+  base64Data:any;
+  retriveRespons:any;
 
-  constructor(private userService:UserService , private router:Router , private orderService:OrderService , private auth:AuthService) { }
+  constructor(private userService:UserService , private router:Router , private orderService:OrderService , private auth:AuthService , private http:HttpClient) { }
 
   ngOnInit(): void {
     this.getUser()
   }
+
+  getImage(){
+    this.http.get(`http://localhost:8081/get/`+this.user.email).subscribe(res => {
+        if(res !== null){
+          this.retriveRespons = res;
+          this.base64Data = this.retriveRespons.picBytes;
+          this.reterviedImage = 'data:image/jpeg;base64,'+this.base64Data;
+        }
+      } ,error => {
+        this.reterviedImage='';
+      });
+    }
 
   getUser(){
     this.userService.getUser(sessionStorage.getItem("user")).subscribe(data => {
@@ -31,12 +60,5 @@ export class AdminNavComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  findOrder(){
-    this.orderService.findByCode(sessionStorage.getItem("user"),this.code).subscribe(data => {
-      sessionStorage.setItem("code" , this.code+'');
-      this.router.navigate([`/search/${data.code}`]);
-    },error => {
-      alert("No Order With "+ this.code );
-    });
-  }
+  
 }

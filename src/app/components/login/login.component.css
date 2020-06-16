@@ -114,3 +114,71 @@ img{
 .btn , .button1{
 	margin-left: 20%;
 }
+input:focus{
+	outline: none;
+	border: none;
+}
+button .btn-success:focus{ border: none;}
+a:focus{outline: none;}
+
+.body{
+  margin: 0px;
+  padding: 0px;
+	background-color:#20205a;
+	height: 100vh;
+}
+.box{
+  width: 200px;
+  height: 200px;
+	position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50% , -50%);
+  overflow: hidden;
+}
+.box .b{
+  border-radius: 50%;
+  border-left: 4px solid ;
+  border-right: 4px solid ;
+  border-top: 4px solid transparent !important;
+  border-bottom: 4px solid transparent !important;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50% , -50%);
+  animation: ro 2s infinite;
+}
+.box  .b1{
+  border-color: #bd4a6f;
+  width: 120px;
+  height: 120px;
+}
+.box  .b2{
+  border-color: #f6b03b;
+  width: 100px;
+  height: 100px;
+  animation-delay: 0.2s;
+}
+.box  .b3{
+  border-color: #2ecc71;
+  width: 80px;
+  height: 80px;
+  animation-delay: 0.4s;
+}
+.box  .b4{
+  border-color: #f5e30d;
+  width: 60px;
+  height: 60px;
+  animation-delay: 0.6s;
+}
+@keyframes ro{
+  0%{
+    transform: translate(-50% , -50%) rotate(0deg);
+  }
+  50%{
+    transform: translate(-50% , -50%) rotate(-180deg);
+  }
+  100%{
+    transform: translate(-50% , -50%) rotate(0deg);
+  }
+}

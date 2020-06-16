@@ -1,0 +1,42 @@
+<app-admin-nav></app-admin-nav>
+<div class="page">
+
+  <div class="data">
+    <app-order-nav></app-order-nav>
+  <div class="container">
+  <div class="form-groub form">
+    <input type="search" name="code" [(ngModel)]="code" id="" class="form-control" placeholder="Enter Code">
+    <button class="bnt btn-success" [disabled]="!code" (click)="findOrderByCode()"><i class="fa fa-search"></i></button>
+  </div>
+  <button class="btn btn-success bb" (click)="getAllOrders()"><i class="fa fa-reply"></i></button>
+  <div class="table-user">
+    <h2>Finished Orders</h2>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">delivery_method</th>
+            <th scope="col">vehicle_type</th>
+            <th scope="col">pickup_Location</th>
+            <th scope="col">mobile</th>
+            <th scope="col">discription</th>
+            <th scope="col">address</th>
+            <th scope="col"> Detailes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders" >
+            <td>{{order.delivery_method}}</td>
+            <td>{{order.vehicle_type}}</td>
+            <td>{{order.pickup_Location}}</td>
+            <td>{{order.mobile}}</td>
+            <td>{{ order.discription}}</td>
+            <td>{{order.address}}</td>
+            <td><button class="button" (click)="findOrder(order.code)"><i class="fa fa-info-circle"></i></button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  </div>
+</div>

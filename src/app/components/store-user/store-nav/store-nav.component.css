@@ -1,0 +1,38 @@
+.navbar{
+  background-color: black;
+}
+img{
+  width:20%;
+}
+.navbar-header{
+  width: 30%;
+}
+.nav{
+  width: 50%;
+ padding: 0;
+}
+li{
+  width: 20%;
+  
+}
+.li{
+  width: 12%;
+}
+a{
+  text-decoration: none;
+  color: grey;
+}
+a:hover{
+  color: white;
+}
+.ul{
+  width: 10%;
+}
+.ul li{
+  width: 100%;
+}
+.logout{
+  border: none;
+    background: none;
+    color: antiquewhite;
+}

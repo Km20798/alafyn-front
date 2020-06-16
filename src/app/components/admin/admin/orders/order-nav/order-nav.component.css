@@ -1,0 +1,36 @@
+nav{
+  height: 50px;
+  border-radius:5px ;
+}
+.all {
+  width: 32%;
+  margin-left: 2%;
+  float: left;
+  height: 100%;
+}
+.wait{
+  width: 32%;
+  float: left;
+  height: 100%;
+}
+.all button , .wait button , .done button{
+  width: 100%;
+  background-color: white;
+  border: none;
+  height: 100%;
+  background-color: #0a0a54;
+  color: white;
+  border-radius: 5px;
+}
+.wait button{
+  background-color: #1e9232;
+}
+.done{
+  width: 32%;
+  float: left;
+  height: 100%;
+}
+a{color: white; text-decoration: none;}
+.done button{
+  background-color: teal;
+}

@@ -10,20 +10,24 @@ import { Router } from '@angular/router';
 })
 export class ContentComponent implements OnInit {
 
+  //-------------------------- Attributes ----------------------
+
+  //--------------------- Attribute --------------------
+
   latitude: 51.678418;
   longitude: 7.809007;
-
+  message:string;
+  okay:boolean=false;
+  //------------------- class ------------------- 
   mes:Message= {
     id:null,
     username:'' ,
     email:'',
     message:'',
     date:new Date()
-
   };
-  message:string;
-  okay:boolean=false;
-
+  
+  // -------------------------------  Methods ------------------------
 
   constructor(private service:MessageService , private router:Router) { }
 
@@ -37,9 +41,6 @@ export class ContentComponent implements OnInit {
   onSubmit(){
     this.service.addMessage(this.mes).subscribe(data => {
       this.Warn();
-      this.mes.username='';
-      this.mes.email='';
-      this.mes.message='';
     }, error => {
       this.message = 'please Enter your data !';
     });

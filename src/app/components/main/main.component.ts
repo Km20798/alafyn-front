@@ -53,15 +53,19 @@ export class MainComponent implements OnInit {
     code:null ,
     payment_method:'',
     time:null,
+    car:null,
+    ok:false,
+    company:'',
+    done:false,
     user:this.user
   }
-
+  showing:boolean=false;
+  wait:boolean=false;
   dist:number;
 
   constructor(private userService:UserService  , private orderService:OrderService , private http:HttpClient) { }
 
   ngOnInit(): void {
-    this.getDistance();
     this.order.code= this.click();
     this.userService.getUser(sessionStorage.getItem("user")).subscribe(data =>{
       this.user = data;
@@ -88,6 +92,11 @@ export class MainComponent implements OnInit {
   }
 
   public upload(){
+
+    if(this.reterviedImage !== null){
+      this.http.delete(`http://localhost:8081/deleteImage/${this.order.code}.jpg`).subscribe(data => {});
+    }
+
     const uploadImageData = new FormData();
     uploadImageData.append('imageFile' , this.selectedFile , this.order.code+'.jpg');
     this.http.post(`http://localhost:8081/upload` , uploadImageData , {observe:'response'}).subscribe(data => {
@@ -104,12 +113,15 @@ export class MainComponent implements OnInit {
     this.imp = true;
   }
 
-
+  showImage(){
+      this.show=true;
+  }
   
 
   getImage(){
     this.http.get(`http://localhost:8081/get/${this.order.code}.jpg`).subscribe(res => {
         this.retriveRespons = res;
+        
         this.base64Data = this.retriveRespons.picBytes;
         this.reterviedImage = 'data:image/jpeg;base64,'+this.base64Data;
       } ,error => {
@@ -117,11 +129,24 @@ export class MainComponent implements OnInit {
       });
     }
 
+    calcPrice(){
+      this.wait = true;
+      this.getDistance(this.order.pickup_Location , this.order.address);
+      setTimeout(() => {
+        if(this.dist){
+          this.wait = false;
+          this.showing = true ;
+        }else{
+          this.wait = false ;
+          alert("error");
+        }
+      }, 5000);
+    }
 
   addOrder(){
-    this.getDistance();
+    
         this.orderService.addOrder(this.user.email , this.order).subscribe(data => {
-          alert("order added successfully");
+         this.showing = false;
           this.order.delivery_method='';
           this.order.vehicle_type='';
           this.order.pickup_Location='';
@@ -134,16 +159,19 @@ export class MainComponent implements OnInit {
           this.order.time=null;
           this.order.user=this.user;
           this.reterviedImage=null;
+          this.order.car = null;
           this.order.code = this.click();
+        } , error => {
+          this.http.delete(`http://localhost:8081/deleteImage/${this.order.code}.jpg`).subscribe(data => {});
         });
   }
 
-  getDistance() {
+  getDistance(from ,to) {
   
       if ( !this.order.pickup_Location || !this.order.address) {
           console.log('please enter the required field')
       } else {
-          fetch(`http://www.mapquestapi.com/directions/v2/route?key=jO7091FNjRbzA3O9EA7AZD3mt2WRiozb&from=${this.order.pickup_Location},EG&to=${this.order.address},EG`)
+          fetch(`http://www.mapquestapi.com/directions/v2/route?key=jO7091FNjRbzA3O9EA7AZD3mt2WRiozb&from=${from},EG&to=${to},EG`)
               .then(result => result.json())
               .then(res => {
                   if (!`${res.route.distance * 1.6}`) {

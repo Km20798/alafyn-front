@@ -1,4 +1,4 @@
-<div class="boy">
+<div class="boy" *ngIf="!loading">
 	<div class="work">
 		<div class="logo">
 			<a routerLink="/home"><img src="../../../assets/img/login.png" alt="login"></a>
@@ -15,17 +15,11 @@
 								[ngClass]="{'is-invalid': userEmail.errors && userEmail.touched}" required placeholder="Email">
 							<i class="fa fa-user"></i>
 						</div>
-						<div class="invalid-feedback" [hidden]="!userEmail.errors?.required">
-							<p>Email is required</p>
-						</div>
 					</div>
 					<div class="form-group">
 						<div class="pass">
 							<input type="password" class="form-control no-border" name="password" [(ngModel)]="password" #userPassword=ngModel [ngClass]="{'is-invalid': userPassword.errors && userPassword.touched}" minlength="8" required placeholder="Password">
 							<i class="fa fa-lock"></i>
-						</div>
-						<div class="invalid-feedback" [hidden]="!userPassword.errors?.required">
-							<p>Password is required</p>
 						</div>
 						<div class="invalid-feedback" [hidden]="!userPassword.errors?.minlength">
 							<p>Password must be at least 8 characters</p>
@@ -44,4 +38,12 @@
 			</div>
 		</div>
 	</div>
+</div>
+<div class="body" *ngIf="loading">
+  <div class="box">
+    <div class="b b1"></div>
+    <div class="b b2"></div>
+    <div class="b b3"></div>
+		<div class="b b4"></div>
+  </div>
 </div>

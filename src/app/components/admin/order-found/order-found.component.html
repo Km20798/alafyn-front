@@ -55,9 +55,17 @@
         <br>
         <tr>
           <td></td>
-          <td><button class="btn btn-success">Okay</button></td>
+          <td><button class="btn btn-success" (click)="getCompany(order.pickup_Location)" *ngIf="order.ok === false">Okay</button></td>
         </tr>
       </table>
     </div>
+    <button (click)="onsendMessage()">send</button>
+  </div>
+</div>
+<div class="company" *ngIf="showCompany">
+  <h2>Choose The Company please ! </h2>
+  <div class="activeCopmpany" *ngFor="let user of users">
+     <h4>{{user.username}}</h4>
+     <button class="btn btn-info" (click)="getCompayData(user.email)">GetDetailes</button>
   </div>
 </div>

@@ -1,0 +1,25 @@
+<app-store-nav></app-store-nav>
+<div class="container">
+  <div class="row">
+    <div class="data">
+      <div class="header">
+        <h4>{{car.id}}</h4>
+        <div class="action">
+          <button class="remove btn btn-danger" (click)="remove()">Remove</button>
+          <button class="btn btn-info" (click)="edit(car.id)">Edit</button>
+        </div>
+      </div>
+      <div class="detailes">
+        <div class="info">
+          <h5>This Car Belongs to <a href="/">{{user.username}}</a></h5>
+          <h6>this Type is {{car.type}}</h6>
+          <h6>The Driver name is {{car.driver}}</h6>
+          <h6>The Driver Number is {{car.phone}} </h6>
+        </div>
+        <div class="image">
+          <img [src]="reterviedImage" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

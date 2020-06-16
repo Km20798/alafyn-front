@@ -27,3 +27,30 @@ h2{
 table{
   text-align: center;
 }
+.company{
+  position: fixed;
+  top: 20%;
+  left: 10%;
+  height: 400px;
+  width: 80%;
+  border: 1px solid #CCC;
+  border-radius: 10px;
+  text-align: center;
+  background-color: darkorange;
+}
+.company h2{
+  text-align: center;
+  color: black;
+}
+.activeCopmpany{
+  border: 1px solid #CCC;
+  width: 20%;
+  background-color: lemonchiffon;
+  border-radius: 10px;
+  margin-left: 5%;
+  float: left;
+  height: 100px;
+}
+.activeCopmpany h4{
+  margin-top: 10%;
+}

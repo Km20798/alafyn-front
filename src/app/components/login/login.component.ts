@@ -16,8 +16,10 @@ export class LoginComponent implements OnInit {
       //---------- field used to login --------------------
       email:string;
       password:string;
-      
-      //------------------ user which getten --------------
+      loading:boolean =false ;
+      id:number;
+      error: string;
+      //------------------ class --------------
       user : User = {
         id:null , 
         username:'',
@@ -32,10 +34,8 @@ export class LoginComponent implements OnInit {
         role:'',
         active:0
       }
-
-      id:number;
-      error: string;
-  constructor(private userService:UserService , private router:Router , private auth:AuthService ) { }
+      //------------------ Methods ------------------------
+      constructor(private userService:UserService , private router:Router , private auth:AuthService ) { }
 
   ngOnInit(): void {
   }
@@ -50,17 +50,21 @@ export class LoginComponent implements OnInit {
       }
    }else{
     this.auth.excuteJWTAuthenticationServices(this.email , this.password).subscribe(data =>{
-      this.userService.getUser(this.email).subscribe(data => {
-        if(data.role === "ROLE_USER"){
-          this.router.navigate(['/welcome']);
-        }else if(data.role === "ROLE_ADMIN"){
-          this.router.navigate(['/welcome/admin']);
-        }else if(data.role === "ROLE_STORE"){
-          this.router.navigate(['/store/welcome']);
-        }else{
-          this.router.navigate(['/login']);
-        }
-      });
+      this.loading = true ;
+      setTimeout(() => {
+        this.userService.getUser(this.email).subscribe(data => {
+          if(data.role === "ROLE_USER"){
+            this.router.navigate(['/welcome']);
+          }else if(data.role === "ROLE_ADMIN"){
+            this.router.navigate(['/welcome/admin']);
+          }else if(data.role === "ROLE_STORE"){
+            this.router.navigate(['/store/welcome']);
+          }else{
+            this.router.navigate(['/login']);
+          }
+        });
+      }, 1000);
+      
     },error => {
       this.error = "Invalid User";
       this.email=null;

@@ -25,7 +25,19 @@ import { NotificationsComponent } from './components/main/notifications/notifica
 import { OrdersComponent } from './components/admin/admin/orders/orders.component';
 import { MyOrderComponent } from './components/main/my-order/my-order.component';
 import { OrderFoundComponent } from './components/admin/order-found/order-found.component';
-import { storeComponent } from './components/store/store.component'
+import { StoreUserComponent } from './components/store-user/store-user.component';
+import { GetuserComponent } from './components/admin/admin/getuser/getuser.component';
+import { AdminsComponent } from './components/admin/admin/admins/admins.component';
+import { StoresComponent } from './components/admin/admin/stores/stores.component';
+import { WaitingComponent } from './components/admin/admin/orders/waiting/waiting.component';
+import { StoreCarComponent } from './components/store-user/store-car/store-car.component';
+import { MycarComponent } from './components/store-user/store-car/mycar/mycar.component';
+import { EditCarComponent } from './components/store-user/store-car/edit-car/edit-car.component';
+import { StoreOrdersComponent } from './components/store-user/store-orders/store-orders.component';
+import { CompanyComponent } from './components/admin/order-found/company/company.component';
+import { FindOrderComponent } from './components/store-user/store-orders/find-order/find-order.component';
+import { StoreProfileComponent } from './components/store-user/store-profile/store-profile.component';
+import { FinishedOrderComponent } from './components/admin/admin/orders/finished-order/finished-order.component';
 
 
 const routes: Routes = [
@@ -47,13 +59,25 @@ const routes: Routes = [
   {path:"updatedata" , component:UpdatedataComponent , canActivate:[RouteGuardService]},
   {path:"welcome/admin" , component:AdminComponent , canActivate:[RouteGuardService]},
   {path:"users" , component:UsersComponent , canActivate:[RouteGuardService] },
+  {path:"users/:username" , component:GetuserComponent , canActivate:[RouteGuardService] },
+  {path:"admins" , component:AdminsComponent , canActivate:[RouteGuardService] },
+  {path:"stores" , component:StoresComponent , canActivate:[RouteGuardService] },
+  {path:"company/:username" , component:CompanyComponent , canActivate:[RouteGuardService] },
+  {path:"store/orders" , component:StoreOrdersComponent , canActivate:[RouteGuardService] },
+  {path:"cars" , component:StoreCarComponent , canActivate:[RouteGuardService] },
+  {path:"storeOrders/:code" , component:FindOrderComponent , canActivate:[RouteGuardService] },
+  {path:"store/MyProfile" , component:StoreProfileComponent , canActivate:[RouteGuardService] },
+  {path:"cars/:id" , component:MycarComponent , canActivate:[RouteGuardService] },
+  {path:"edit/:id" , component:EditCarComponent , canActivate:[RouteGuardService] },
   {path:"search/:code" , component:OrderFoundComponent , canActivate:[RouteGuardService]},
   {path:"messages" , component:MessagesComponent , canActivate:[RouteGuardService]},
   {path:"orders" , component:OrdersComponent , canActivate:[RouteGuardService]},
+  {path:"orders/waiting" , component:WaitingComponent , canActivate:[RouteGuardService]},
+  {path:"orders/finished" , component:FinishedOrderComponent , canActivate:[RouteGuardService]},
   {path:"terms-conditions" , component:PrivacyComponent },
   {path:"myOrders" , component:MyOrderComponent , canActivate:[RouteGuardService]}, 
   {path:"account" , component:MyAccountComponent , canActivate:[RouteGuardService]}, 
-  {path:"store/welcome" , component:storeComponent , canActivate:[RouteGuardService]}, 
+  {path:"store/welcome" , component:StoreUserComponent , canActivate:[RouteGuardService]}, 
   {path:"**" , component:ErrorComponent}
 ];
 

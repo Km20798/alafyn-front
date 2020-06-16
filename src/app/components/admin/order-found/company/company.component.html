@@ -1,0 +1,68 @@
+<app-admin-nav></app-admin-nav>
+
+ <div class="page">
+  <div class="image">
+    <img [src]="reterviedImage" alt="">
+  </div>
+  <div class="data">
+    <div class="mydata">
+      <div class="header">
+        <h2>About Me</h2>
+        <p>{{user.id}}</p>
+      </div>
+      <table>
+        <tr>
+          <th>Name</th>
+          <td>{{user.username}}</td>
+        </tr>
+        <tr>
+          <th>Email</th>
+          <td>{{user.email}}</td>
+        </tr>
+        <tr>
+          <th>Phone</th>
+          <td>{{user.phone}}</td>
+        </tr>
+        <tr>
+          <th>Goverment</th>
+          <td>{{user.address.country}}</td>
+        </tr>
+        <tr>
+          <th>city</th>
+          <td>{{user.address.city}}</td>
+        </tr>
+        <tr>
+          <th>Address</th>
+          <td>{{user.address.addressDet}}</td>
+        </tr>
+        <tr>
+          <th>Role</th>
+          <td>{{user.role}}</td>
+        </tr>
+      </table>
+    </div>
+    
+    <div class="container" *ngIf="det">
+      <div class="con">
+        <div class="col-sm-5 col-xs-6 img">
+          <img [src]="reterviedImage" class="im"></div>
+        <div class="col-sm-5 col-xs-6 img">
+          <img [src]="reterviedImage2" class="im"></div>
+        <div class="col-sm-5 col-xs-6 img">
+          <img [src]="reterviedImage3" class="im"></div>
+        <div class="col-sm-5 col-xs-6 img">
+          <img [src]="reterviedImage4" class="im"> 
+        </div>
+      </div>
+    </div>
+    <div class="actions">
+        <div class="role">
+          <button class="myrole" (click)="showInfo()" ><i class="fa fa-info-circle"></i></button>
+          <button class="btn btn-info back" (click)="back()">Back</button>
+          <button class="btn btn-success ok" (click)="okay()">Okay</button>
+          
+        </div>
+    </div>
+  </div>
+
+ </div>

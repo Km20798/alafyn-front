@@ -42,6 +42,9 @@
 .form{
   display: flex;
 }
+.left-form{
+  width: 40%;
+}
 form{
   margin-left: 3%;
   margin-top: 5%;
@@ -147,5 +150,47 @@ input[type="checkbox"]{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.disabled
+{
+  pointer-events: none;
+  opacity: 0.5;
+  background: #CCC;
+}
+.showing{
+  position: fixed;
+  top: 20%;
+  left: 30%;
+  width: 40%;
+  padding-top: 10%;
+  padding-bottom: 10%;
+  color: white;
+  border: 1px solid #191880;
+  background-color: #191880;
+  text-align: center;
+  
+}
+span{
+  color: crimson;
+}
+.showing button{
+  width: 35%;
+    height: 40px;
+    background: white;
+    border: none;
+    border-radius: 10px;
+}
+.edit {
+  color: blue;
+    position: absolute;
+    left: 91%;
+    font-size: 20px;
+    top: 40%;
+    border: none;
+    background: none;
+}
+input:focus{
+  outline: none;
+  border: 1px solid gray;
 }
 /*  */

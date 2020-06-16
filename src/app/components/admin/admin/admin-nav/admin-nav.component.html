@@ -1,18 +1,14 @@
 <nav class="navbar navbar-expand-lg color">
   <a routerLink="/welcome/admin"><img src="../../../../../assets/img/logo.png" alt=""></a>
   <ul class="image">
-    <li> <a href=""><img src="../../../../../assets/img/karim.jpg" class="img" alt=""></a></li>
+    <li> <a href=""><img [src]="reterviedImage" class="img" alt=""></a></li>
    </ul>
   <ul class="ul">
     <li><a routerLink="/messages">Message</a></li>
     <li><a routerLink="/orders">Orders</a></li>
     <li><a routerLink="/users">Users</a></li>
-    <li>
-      <div class="form-groub form">
-        <input type="search" name="code" [(ngModel)]="code" id="" class="form-control" placeholder="Enter Code">
-        <button class="bnt btn-success" [disabled]="!code" (click)="findOrder()"><i class="fa fa-search"></i></button>
-      </div>
-    </li>
+    <li *ngIf="user.email === 'admin@admin.com'"><a routerLink="/admins">Admins</a></li>
+    <li><a routerLink="/stores">Stores</a></li>
   </ul>
  
   <button (click)="logout()"><i class="fa fa-sign-out"></i></button>

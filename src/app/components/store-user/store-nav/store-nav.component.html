@@ -1,0 +1,16 @@
+<nav class="navbar navbar-expand-lg color ">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" routerLink="/store/welcome"><img src="../../../../assets/img/logo.png" alt=""></a>
+    </div>
+    <ul class="nav navbar-nav navbar-right ">
+      <li class="li"><a routerLink="/cars"><span class="fa fa-car"></span> Cars</a></li>
+      <li class="li"><a routerLink="/store/orders"><span class="fa fa-table"></span> Orders</a></li>
+      <li><a href="#"><span class="fa fa-bell"></span> Notifications</a></li>
+      <li><a routerLink="/store/MyProfile"><span class="fa fa-user"></span> My Profile</a></li>
+    </ul>
+    <ul class="ul nav navbar-nav navbar-right">
+      <li><button class="logout" (click)="logout()"><span class="fa fa-sign-out"></span> Logout</button></li>
+    </ul>
+  </div>
+</nav>

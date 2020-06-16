@@ -1,0 +1,50 @@
+<app-store-nav></app-store-nav>
+<div class="page">
+  <div class="work">
+    <div class="img">
+      <img [src]="reterviedImage" alt="">
+    </div>
+    <div class="data">
+      <h2>{{order.code}}</h2>
+      <table>
+        <tr>
+          <th>Delivery Method</th>
+          <td>{{order.delivery_method}}</td>
+        </tr>
+        <tr>
+          <th>Vehicle Type</th>
+          <td>{{order.vehicle_type}}</td>
+        </tr>
+        <tr>
+          <th>Pickup Location</th>
+          <td>{{order.pickup_Location}}</td>
+        </tr>
+        <tr>
+          <th>Mobile</th>
+          <td>{{order.mobile}}</td>
+        </tr>
+        <tr>
+          <th>Discription</th>
+          <td>{{order.discription}}</td>
+        </tr>
+        <tr>
+          <th>Client Name</th>
+          <td>{{order.client_name}}</td>
+        </tr>
+        <tr>
+          <th>Address</th>
+          <td>{{order.address}}</td>
+        </tr>
+        <tr>
+          <th>Time</th>
+          <td>{{order.time}}</td>
+        </tr>
+        <br>
+        <tr>
+          <td></td>
+          <td><button class="btn btn-success"(click)="aggree()" *ngIf="order.done === false" >Done</button></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

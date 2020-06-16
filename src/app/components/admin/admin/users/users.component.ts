@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -9,7 +10,7 @@ import { User } from 'src/app/models/user.model';
 })
 export class UsersComponent implements OnInit {
 
-  users:User[];
+  users:User[]=[];
   user:User = {
     id:null , 
     username:'',
@@ -24,7 +25,10 @@ export class UsersComponent implements OnInit {
     role:"ROLE_USER",
     active:0
   }
-  constructor(private userService:UserService) { }
+  email:string;
+  username:string;
+  message:string='';
+  constructor(private userService:UserService , private router:Router) { }
 
   ngOnInit(): void {
     this.getAll();
@@ -32,7 +36,13 @@ export class UsersComponent implements OnInit {
 
   getAll(){
     this.userService.getAll().subscribe(data => {
-      this.users = data;
+      this.users=[];
+      data.forEach(element => {
+        if(element.role === 'ROLE_USER'){
+          
+          this.users.unshift(element);
+        }
+      });
     });
   }
 
@@ -47,5 +57,24 @@ export class UsersComponent implements OnInit {
     });
   }
   
+  getUser(username , email){
+    sessionStorage.setItem("id" , email);
+    this.router.navigate([`/users/${username}`]);
+  }
 
+
+  findByEmail(){
+    this.users.forEach(element => {
+      if(element.email === this.email){
+        sessionStorage.setItem("id" , this.email);
+        this.router.navigate([`/users/${this.username}`]);
+      }else{
+        this.message = "this user isn't exit"
+        setTimeout(() => {
+          this.message = ""
+        }, 3000);
+      }
+    });
+    
+  }
 }
