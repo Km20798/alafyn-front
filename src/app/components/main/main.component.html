@@ -1,4 +1,9 @@
-<div class="page">
+<div>
+  <app-main-nav></app-main-nav>
+  
+  <router-outlet></router-outlet>
+</div>
+<!-- <div class="page">
   <div class="main">
     <app-main-nav></app-main-nav>
   <div class="work">
@@ -30,7 +35,7 @@
         <div class="form-group">
           <label for="Delivery method">Delivery method</label>
           <select name="delivery_method" [(ngModel)]="order.delivery_method" id="" class="form-control no-border">
-            <option value="" selected>Select Delivery method</option>
+            <option value="" disabled>Select Delivery method</option>
             <option value="Delivery">Delivery</option>
             <option value="Delivery And Collection">Delivery And Collection</option>
             <option value="Move Your House">Move Your House</option>
@@ -39,7 +44,7 @@
         <div class="form-group">
           <label for="Vehicle type">Vehicle type</label>
           <select name="vehicle_type" [(ngModel)]="order.vehicle_type" id="" class="form-control no-border">
-            <option value="" selected>Select Vehicle type</option>
+            <option value="" disabled>Select Vehicle type</option>
             <option value="MiniVan">MiniVan</option>
             <option value="Pickup">Pickup</option>
             <option value="Jumbo">Jumbo</option>
@@ -75,6 +80,7 @@
             <option value="Card">Card</option>
           </select>
         </div>
+        <p *ngIf="order.payment_method === 'Card'">{{card}}</p>
         <div class="form-group">
           <label for="Time">Time</label>
           <input type="date" name="time" [(ngModel)]="order.time" id="" class="form-control no-border">
@@ -82,8 +88,11 @@
     </div>
     <div class="imageOrder">
        <div class="image">
-         <button class="edit"*ngIf="reterviedImage" (click)="showImage()"><i class="fa fa-edit"></i></button>
         <img [src]="reterviedImage" alt="" *ngIf="reterviedImage">
+        <div class="wating">
+          <div class="loading" *ngIf="load">
+          </div>
+        </div>
       </div>
         <div class="in" *ngIf="show">
           <input type="file" id="file" (change)="onFileChanged($event)">
@@ -99,94 +108,140 @@
     </div>  
   </div>
 
-  <p>{{myMessage}}</p>
+  <p class="err" *ngIf="mymes">{{mymes}}</p>
   <button class="btn btn-success all" (click)="calcPrice()">Order Now</button>
     </form>
     <form class="anthorForm" *ngIf="order.delivery_method === 'Move Your House'">
-      <div class="form-group">
-        <label for="delivery_method">Delivery_Method</label>
-        <select name="delivery_method" [(ngModel)]="order.delivery_method" id="" class="form-control no-border">
-          <option value="" selected>Select Delivery method</option>
-          <option value="Delivery">Delivery</option>
-          <option value="Delivery And Collection">Delivery And Collection</option>
-          <option value="Move Your House">Move Your House</option>
-        </select>
+      <div *ngIf="next === 0">
+        <div class="form-group">
+          <label for="delivery_method">Delivery_Method</label>
+          <select name="delivery_method" [(ngModel)]="order.delivery_method" id="" class="form-control no-border">
+            <option value="" selected>Select Delivery method</option>
+            <option value="Delivery">Delivery</option>
+            <option value="Delivery And Collection">Delivery And Collection</option>
+            <option value="Move Your House">Move Your House</option>
+          </select>
+        </div>
+        <h5>Inspect Fees = 100 L.E</h5>
+        <br>
+        <div class="form-group">
+          <label for="furniture_text">Furniture Text</label>
+          <table>
+            <tr>
+              <td>
+                <input type="checkbox" name="c1" [(ngModel)]="c1" value="1" id="" class="">
+              </td>
+              <th>
+                <label> Packing and Wrapping </label>
+              </th>
+            </tr>
+            <tr>
+              <td>
+                <input type="checkbox" name="c2" value="2" [(ngModel)]="c2" id="" class="">
+              </td>
+              <th>
+                <label> Screwing and Unscrewing </label>
+              </th>
+            </tr>
+            <tr>
+              <td>
+                <input type="checkbox" name="c3" [(ngModel)]="c3" value="3" id="" class="">
+              </td>
+              <th>
+                <label> Installing and Operating Electronics </label>
+              </th>
+            </tr>
+            <tr>
+              <td>
+                <input type="checkbox" name="c4" [(ngModel)]="c4" value="4" id="" class="">
+              </td>
+              <th>
+                <label> Installing Air Conditioner </label>
+              </th>
+            </tr>
+            <tr>
+              <td>
+                <input type="checkbox" name="c5" [(ngModel)]="c5" value="5" id="" class="">
+              </td>
+              <th>
+                <label> Packing Fragile Items </label>
+              </th>
+            </tr>
+            <tr>
+              <td>
+                <input type="checkbox" name="c6" [(ngModel)]="c6" value="6" id="" class="">
+              </td>
+              <th>
+                <label> Furniture Elevating Services </label>
+              </th>
+            </tr>
+          </table>        
+        </div>
+        <div class="form-group">
+          <label for="Payment Method"> Payment Method</label>
+          <select name="payment_method" [(ngModel)]="order.payment_method" id="" class="form-control no-border sec">
+            <option disabled value="" selected>Select your Payment Method</option>
+            <option value="Cash">Cash</option>
+            <option value="Card">Card</option>
+          </select>
+        </div>
+        <p class="error" *ngIf="error">{{error}}</p>
+        <button class="b" (click)="nextHouse()">Next</button>
       </div>
-      <h5>Inspect Fees = 100 L.E</h5>
-      <br>
-      <div class="form-group">
-        <label for="furniture_text">Furniture Text</label>
-        <table>
-          <tr>
-            <td>
-              <input type="checkbox" name="" id="" class="">
-            </td>
-            <th>
-              <label> Packing and Wrapping </label>
-            </th>
-          </tr>
-          <tr>
-            <td>
-              <input type="checkbox" name="" id="" class="">
-            </td>
-            <th>
-              <label> Screwing and Unscrewing </label>
-            </th>
-          </tr>
-          <tr>
-            <td>
-              <input type="checkbox" name="" id="" class="">
-            </td>
-            <th>
-              <label> Installing and Operating Electronics </label>
-            </th>
-          </tr>
-          <tr>
-            <td>
-              <input type="checkbox" name="" id="" class="">
-            </td>
-            <th>
-              <label> Installing Air Conditioner </label>
-            </th>
-          </tr>
-          <tr>
-            <td>
-              <input type="checkbox" name="" id="" class="">
-            </td>
-            <th>
-              <label> Packing Fragile Items </label>
-            </th>
-          </tr>
-          <tr>
-            <td>
-              <input type="checkbox" name="" id="" class="">
-            </td>
-            <th>
-              <label> Furniture Elevating Services </label>
-            </th>
-          </tr>
-        </table>        
+      <div *ngIf="next === 1">
+        <div class="form-group">
+          <label for="Vehicle type">Vehicle type</label>
+          <select name="vehicle_type" [(ngModel)]="order.vehicle_type" id="" class="form-control no-border">
+            <option value="" disabled selected>Select Vehicle type</option>
+            <option value="MiniVan">MiniVan</option>
+            <option value="Pickup">Pickup</option>
+            <option value="Jumbo">Jumbo</option>
+            <option value="Jumbo Closed Body">Jumbo Closed Body</option>
+            <option value="Flatbed Trailer">Flatbed Trailer</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="Pickup Location">Pickup Location</label>
+          <input type="text" name="pickup_Location" [(ngModel)]="order.pickup_Location" id="" class="form-control no-border" placeholder="Enter your Location">
+        </div>
+        <div class="form-group">
+          <label for="Mobile">Mobile</label>
+          <input type="text" name="mobile" [(ngModel)]="order.mobile" id="" class="form-control no-border" placeholder="Enter your Mobile">
+        </div>
+        <div class="form-group">
+          <label for="Client name">Client name</label>
+          <input type="text" name="client_name" [(ngModel)]="order.client_name" id="" class="form-control no-border" placeholder="Enter a Client name">
+        </div>
+        <p class="error" *ngIf="error">{{error}}</p>
+        <button class="b" (click)="nextHouse()">Next</button>
       </div>
-      <div class="form-group">
-        <label for="Payment Method"> Payment Method</label>
-        <select name="payment_method" [(ngModel)]="order.payment_method" id="" class="form-control no-border sec">
-          <option value="" selected>Select your Payment Method</option>
-          <option value="Cash">Cash</option>
-          <option value="Card">Card</option>
-        </select>
-        <button class="c" *ngIf="order.payment_method === 'Card'">Add Card</button>
+      <div *ngIf="next === 2">
+        <div class="form-group">
+          <label for="Address">Address</label>
+          <input type="text" name="address" [(ngModel)]="order.address" id="" class="form-control no-border" placeholder="Enter a Location of a place">
+        </div>
+        <div class="form-group">
+          <label for="Time">Time</label>
+          <input type="date" name="time" [(ngModel)]="order.time" id="" class="form-control no-border">
+        </div>
+        <div class="form-group" style="text-align:left;">
+          <label for="cars" style="text-align: center;">Number Of Cars</label>
+          <input type="number" name="car" [(ngModel)]="order.car" class="form-control no-border" placeholder="Enter the number of cars that u need" id="">
+        </div>
+        <p class="error" *ngIf="error">{{error}}</p>
+        <button class="b" (click)="calcHomePrice()">Next</button>
       </div>
-      <button class="b">Submit</button>
     </form>
   </div>
   <div class="showing" *ngIf="showing">
     <h6>The Distance between {{order.pickup_Location}} And {{order.address}} is <span>{{dist}}KM</span> </h6> 
     <h4>The cost of that Order is :-</h4>
-    <h3><span>{{order.price}}L.E</span></h3>
-    <button (click)="addOrder()">Accept</button>
+    <h3><span>{{order.price | number : '1.0-0'}}L.E</span></h3>
+    <button class="btn btn-success" (click)="addOrder()">Accept</button>
+    <button class="btn btn-danger" (click)="refuse()">Refuse</button>
   </div>
   <div class="showing" *ngIf="wait">
     <h3>Waiting please ....</h3>
   </div>
   </div>
-</div>
+</div> -->

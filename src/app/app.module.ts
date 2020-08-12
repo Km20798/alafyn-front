@@ -59,6 +59,9 @@ import { CompanyComponent } from './components/admin/order-found/company/company
 import { FindOrderComponent } from './components/store-user/store-orders/find-order/find-order.component';
 import { StoreProfileComponent } from './components/store-user/store-profile/store-profile.component';
 import { FinishedOrderComponent } from './components/admin/admin/orders/finished-order/finished-order.component';
+import { AdminNotificationComponent } from './components/admin/admin-notification/admin-notification.component';
+import { MainPageComponent } from './components/main/main-page/main-page.component';
+import { NotificationStoreComponent } from './components/store-user/notification-store/notification-store.component';
 
 @NgModule({
   declarations: [
@@ -107,7 +110,10 @@ import { FinishedOrderComponent } from './components/admin/admin/orders/finished
     CompanyComponent,
     FindOrderComponent,
     StoreProfileComponent,
-    FinishedOrderComponent
+    FinishedOrderComponent,
+    AdminNotificationComponent,
+    MainPageComponent,
+    NotificationStoreComponent
   ],
   imports: [
     BrowserModule,

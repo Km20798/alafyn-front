@@ -10,6 +10,7 @@ import { User } from 'src/app/models/user.model';
 export class AdminComponent implements OnInit {
 
   user:User;
+  
 
   constructor(private userService:UserService) { }
 

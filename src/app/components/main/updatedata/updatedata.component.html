@@ -1,8 +1,7 @@
-
+<div class="do">
 <div class="page">
-  <app-main-nav style="background-color: white;"></app-main-nav>
   <div class="work">
-   <div class="form">
+   <div class="form" *ngIf="user.email">
      <form (ngSubmit)="updateUser()">
       <div class="email" *ngIf="num === 1">
         <i class="fa fa-envelope-square"></i>
@@ -51,6 +50,6 @@
       </div>
      </form>
    </div> 
-   
+  </div>
   </div>
 </div>

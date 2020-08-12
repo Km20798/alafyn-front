@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import * as SockJS from 'sockjs-client';
-import * as Stomp from 'stompjs';
-import { NgForm } from '@angular/forms';
+import { ChatMessageService } from 'src/app/services/chat-message.service';
+import { Notifications } from 'src/app/models/Notifications.model';
 
 
 @Component({
@@ -11,47 +10,26 @@ import { NgForm } from '@angular/forms';
 })
 export class NotificationsComponent implements OnInit {
 
-  stompClient: any;
-  socket: any;
-
-  @ViewChild('sendMessage') messsages: NgForm ;
-
-  messag = [];
+  notifications:Notifications[]=[]; 
   user = localStorage.getItem('user');
+  
 
-
-  constructor() { }
+  constructor(private chatMessage:ChatMessageService) { }
 
   ngOnInit(): void {
-    this.connected();
+    this.getAllNotifications();
   }
 
   
-  connected() {
-    let id =  '1234';
-    if(id == '1234'){
-    this.socket = new SockJS('http://localhost:8081/chat');
-    this.stompClient = Stomp.over(this.socket);
 
-    const _this = this;
-
-    _this.stompClient.connect({}, function(frame) {
-      console.log('................Connected: ' + frame);
-
-      _this.stompClient.subscribe('/topic/mes', function(res) {
-        let data = JSON.parse(res.body);
-        console.log('i am user receive note');
-        console.log(data.content);
-        _this.messag.push(data.content);
+getAllNotifications(){
+  this.chatMessage.getAll(sessionStorage.getItem("user")).subscribe(data => {
+    if(data !== null){
+      data.forEach(element => {
+        this.notifications.unshift(element);
       });
-
-    });
-  }
-}
-
-onsendMessage() {
-  this.stompClient.send('/app/chat', {}, JSON.stringify({content: this.messsages.value.message, sender: localStorage.getItem('user')}));
-  this.messsages.reset();
+    }
+  })
 }
 
 

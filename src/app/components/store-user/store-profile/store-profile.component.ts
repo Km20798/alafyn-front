@@ -19,11 +19,12 @@ export class StoreProfileComponent implements OnInit {
     phone:'',
     address:{
     city:'',
-    country:'0',
+    country:'',
     addressDet:''
     },
     role:'',
-    active:null
+    active:null,
+    card:false
   }
   retriveRespons:any;
   base64Data:any;
@@ -32,6 +33,8 @@ export class StoreProfileComponent implements OnInit {
   reterviedImage3:any;
   reterviedImage4:any;
   personalImage:any;
+  load:boolean=true ;
+
 
   constructor(private userService:UserService , private http:HttpClient) { }
 
@@ -40,13 +43,13 @@ export class StoreProfileComponent implements OnInit {
   }
 
   getUser(){
-    this.userService.getUser(sessionStorage.getItem("user")).subscribe(data => {this.user = data; this.getImage()} )
+    this.userService.getUser(sessionStorage.getItem("user")).subscribe(data => {this.user = data; this.getImage();} )
   }
 
   getImage(){
-    let names = ['card-front' , 'card-back' , 'record-front' , 'record-back' , '']
+    let names = ['card-front' , 'card-back' , 'record-front' , 'record-back' , 'logo']
     names.forEach(element => {
-      this.http.get(`http://localhost:8081/get/${this.user.email}${element}`).subscribe(res => {
+      this.http.get(`https://alafyn20.herokuapp.com/get/${this.user.email}${element}`).subscribe(res => {
         this.retriveRespons = res;
         this.base64Data = this.retriveRespons.picBytes;
         if(element === "card-front"){
@@ -57,10 +60,12 @@ export class StoreProfileComponent implements OnInit {
           this.reterviedImage3 = 'data:image/jpeg;base64,'+this.base64Data;
         }else if(element === "record-back"){
           this.reterviedImage4 = 'data:image/jpeg;base64,'+this.base64Data;
-        }else if(element === ''){
+        }else if(element === 'logo'){
           this.personalImage = 'data:image/jpeg;base64,'+this.base64Data;
+          this.load = false;
         }
       } ,error => {
+        this.load = false;
         this.reterviedImage='';
       });
     });

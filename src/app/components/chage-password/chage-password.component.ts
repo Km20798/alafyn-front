@@ -25,6 +25,7 @@ export class ChagePasswordComponent implements OnInit {
   code:number;
   codev:number;
   show:boolean = false ;
+  load:boolean = false;
   //----------------  classes attribute -------------------- 
   user : User = {
     id:null , 
@@ -38,7 +39,8 @@ export class ChagePasswordComponent implements OnInit {
       addressDet:''
     },
     role:'',
-    active:0
+    active:0,
+    card:false
   }
   mail:Email={
     to:this.email,
@@ -70,11 +72,14 @@ export class ChagePasswordComponent implements OnInit {
    
 
   search(){
+    this.load = true;
     this.userService.getUser(this.email).subscribe(data => {
+      this.load = false;
       this.user = data;
       this.ok = true
       this.message = '';
     } , error => {
+      this.load = false ;
       this.message = 'This Email not Exits !' ;
     });
   }

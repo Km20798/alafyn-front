@@ -1,0 +1,23 @@
+.jumbo , .minvan , .pickup , .flatbedtrailer{
+  text-align: center;
+  margin-top: 2%;
+  background-color: white;
+  padding: 3% 3% 5% 3%;
+}
+.jumbo h2 , .minvan h2 , .pickup h2 , .flatbedtrailer h2{
+  font-family: none;
+    font-weight: bold;
+    font-size: 45px;
+    margin-bottom: 5%;
+}
+.img1 ,.img2 , .img3{
+  border: 1px solid white;
+    border-radius: 10px;
+    box-shadow: 1px 1px 30px 5px #d8d2d2;
+    padding: 1%;
+    margin-right: 5%;
+}
+.edit{
+  width: 19%;
+  padding: 0% 2%; 
+}

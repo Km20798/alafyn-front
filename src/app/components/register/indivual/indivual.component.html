@@ -114,9 +114,14 @@
             <div class="Myimage" *ngIf="showImage">
               <div class="button-wrapp">
                 <h6>User Image</h6>
-                <div class="wrapp" *ngIf="!imp">
+                <div class="wrapp" *ngIf="!imp && !load">
                   <label class="but" for="upload"> <i class="fa fa-camera"></i></label>
                   <input id="upload" type="file" (change)="onFileChanged($event)">
+                </div>
+                <div class="wating" *ngIf="load">
+                  <div class="loading">
+                  
+                  </div>
                 </div>
                 <div class="wrapp" *ngIf="imp">
                   <img [src]="reterviedImage" class="img" alt="">

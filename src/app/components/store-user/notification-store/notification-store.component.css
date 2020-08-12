@@ -1,0 +1,107 @@
+.page{
+  background-color: #c0c0c1;
+  height: 100%;
+}
+.work{
+  background-color: white;
+  margin-left: 5%;
+  width: 90%;
+  min-height: 90.5vh;
+}
+.working{
+  text-align: center;
+  margin-top: 0%;
+  background-color: #c0c0c1;
+  border: 1px solid #c7ceb8;
+}
+h5{
+  padding: 1%;
+}
+.not{
+  margin-top: 5%;
+  margin-left: 5%;
+  width: 90%;
+}
+.noto{
+  width: 100%;
+  border: 1px solid #13b724;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #14ea65;
+}
+.refuse{
+  border: 1px solid #ef3057;
+  color: white;
+  background-color: #ef3057;
+}
+.cont{
+  width: 90%;
+  margin-left: 5%;
+}
+.header{
+  margin-bottom: 0;
+  font-weight: bolder;
+  color: #13138a;
+}
+.contant{
+  margin-left: 3%;
+  font-weight: bold; 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-style: italic;
+  
+}
+.d1{
+  float: left;
+  width: 85%;
+  height: 100%;
+}
+.time{
+  color: dimgrey;
+}
+.wating{
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+}
+.loading{
+  width: 150px;
+  height: 150px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  margin-top: 19%;
+  margin-bottom: 15%;
+  border-top: 10px solid #e74c3c;
+  position: relative;
+  animation: a1 2s linear infinite;
+}
+.loading::before,.loading::after{
+  content: '';
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  left: 0;  
+  top: -10px;
+  box-sizing: border-box;
+  border-radius: 50%;
+}
+.loading::before{
+  border-top: 10px solid #e67e22;
+  transform: rotate(120deg);
+}
+.loading::after{
+  border-top: 10px solid #3498db;
+  transform: rotate(270deg);
+}
+@keyframes a1{
+  to{
+    transform: rotate(360deg);
+  }
+}
+@keyframes a2{
+  to{
+    transform: rotate(-360deg);
+  }
+}

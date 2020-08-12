@@ -53,34 +53,17 @@
     <div class="info" *ngIf="show && dist">
       <p>The distance between {{from}}, {{to}}: <span>{{dist}} km</span>  <br>
         Time take to travel: <span>1 hour 42 mins</span></p>
-        <p>Charge to be paid: <span>EGP {{price}}</span></p>
+        <p>Charge to be paid: <span>EGP {{price | number : '1.0-0'}}</span></p>
     </div>
     <div class="info" *ngIf="network && !dist">
       <h3>{{network}}</h3>
     </div>
     <div class="wating" *ngIf="wait">
       <div class="loading">
-        <span>loading... </span>
+        <span>loading .... </span>
       </div>
     </div>
 
   </div>
 </div>
 <app-footer></app-footer>
-
-<!-- <script type="text/javascript">
-  window.onload = function() {
-    L.mapquest.key = 'lYrP4vF3Uk5zgTiGGuEzQGwGIVDGuy24';
-
-    var map = L.mapquest.map('map', {
-      center:{lat:41.85 , lng:-87.65},
-      layers: L.mapquest.tileLayer('map'),
-      zoom: 13
-    });
-
-    L.mapquest.directions().route({
-      start: 'cairo',
-      end: 'tanta'
-    });
-  }
-</script> -->

@@ -11,39 +11,39 @@ export class UserService {
   constructor(private http:HttpClient) { }
 
   getUserByEmailAndPassword(email:string , password:string){
-    return this.http.get<User>(`http://localhost:8081/users/${email}/${password}` );
+    return this.http.get<User>(`https://alafyn20.herokuapp.com/users/${email}/${password}` );
   }
 
   createUser(user:User){
-    return this.http.post<User>(`http://localhost:8081/users/reg` , user );
+    return this.http.post<User>(`https://alafyn20.herokuapp.com/users/reg` , user );
   }
 
   getUser(email:string){
-    return this.http.get<User>(`http://localhost:8081/users/${email}` );
+    return this.http.get<User>(`https://alafyn20.herokuapp.com/users/${email}` );
   }
 
   getUserByPhone(phone:string){
-    return this.http.get<User>(`http://localhost:8081/users/${phone}` );
+    return this.http.get<User>(`https://alafyn20.herokuapp.com/users/${phone}` );
   }
 
   deleteUser(email:string){
-    return this.http.delete(`http://localhost:8081/users/${email}` );
+    return this.http.delete(`https://alafyn20.herokuapp.com/users/${email}` );
   }
 
   getAll(){
-    return this.http.get<User[]>(`http://localhost:8081/users`);
+    return this.http.get<User[]>(`https://alafyn20.herokuapp.com/users`);
   }
 
   updateUser(email:string , user:User){
-    return this.http.put<User>(`http://localhost:8081/users/${email}` , user );
+    return this.http.put<User>(`https://alafyn20.herokuapp.com/users/${email}` , user );
   }
 
   sendEmail(email:Email){
-    return  this.http.post<Email>(`http://localhost:8081/sendMail` , email );
+    return  this.http.post<Email>(`https://alafyn20.herokuapp.com/sendMail` , email );
   }
 
   getStoreToWork(country:string){
-    return this.http.get<User[]>(`http://localhost:8081/users/store/${country}`);
+    return this.http.get<User[]>(`https://alafyn20.herokuapp.com/users/store/${country}`);
   }
 
 }

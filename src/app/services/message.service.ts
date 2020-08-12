@@ -10,15 +10,15 @@ export class MessageService {
   constructor(private http:HttpClient) { }
 
   getAll(){
-    return this.http.get<Message[]>('http://localhost:8081/messages')
+    return this.http.get<Message[]>('https://alafyn20.herokuapp.com/messages')
   }
   addMessage(message:Message){  
-    return this.http.post<Message>('http://localhost:8081/messages'  ,  message );
+    return this.http.post<Message>('https://alafyn20.herokuapp.com/messages'  ,  message );
   }
   deleteMessage(id:number){
-    return this.http.delete(`http://localhost:8081/messages/${id}`);
+    return this.http.delete(`https://alafyn20.herokuapp.com/messages/${id}`);
   }
   getMessage(id:number){
-    return this.http.get<Message>(`http://localhost:8081/messages/${id}`);
+    return this.http.get<Message>(`https://alafyn20.herokuapp.com/messages/${id}`);
   }
 }

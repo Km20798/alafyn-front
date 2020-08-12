@@ -5,9 +5,8 @@ import { Order } from 'src/app/models/Order.model';
 import { HttpClient } from '@angular/common/http';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
-import * as SockJS from 'sockjs-client';
-import * as Stomp from 'stompjs';
-import { NgForm } from '@angular/forms';
+import { ChatMessageService } from 'src/app/services/chat-message.service';
+import {Notifications} from "./../../../models/Notifications.model"
 
 @Component({
   selector: 'app-order-found',
@@ -16,6 +15,7 @@ import { NgForm } from '@angular/forms';
 })
 export class OrderFoundComponent implements OnInit {
 
+  load:boolean = false ;
 
   order:Order={
     id:null,
@@ -46,15 +46,21 @@ export class OrderFoundComponent implements OnInit {
         addressDet:''
       },
       role:'',
-      active:0  
+      active:0  ,
+      card:false
     }
   };
+  notifcation:Notifications={
+    id:null , 
+    content:'',
+    sender:'',
+    rec:'',
+    time:new Date(),
+    seen:false,
+    accept:false
+  }
   users:User[];
   showCompany:boolean=false ;
-  stompClient: any;
-   socket: any;
-   messag = [];
-  // @ViewChild('sendMessage') messsages: NgForm ;
 
   imageName:any;
   selectedFile:File;
@@ -64,23 +70,24 @@ export class OrderFoundComponent implements OnInit {
   retriveRespons:any;
   imp:boolean=false;
 
-  constructor(private orderService:OrderService , private router:Router,private http:HttpClient , private userService:UserService) { }
+  constructor(private orderService:OrderService , private router:Router,private http:HttpClient , private userService:UserService , private chatMessageService:ChatMessageService) { }
 
   ngOnInit(): void {
-    this.connected();
     this.findOrder();
   }
 
   
 
   getImage(){
-    this.http.get(`http://localhost:8081/get/${Number(sessionStorage.getItem("code"))}`+'.jpg').subscribe(res => {
+    this.load = true ;
+    this.http.get(`https://alafyn20.herokuapp.com/get/${Number(sessionStorage.getItem("code"))}`+'.jpg').subscribe(res => {
         this.retriveRespons = res;
         this.base64Data = this.retriveRespons.picBytes;
         this.reterviedImage = 'data:image/jpeg;base64,'+this.base64Data;
-        
+        this.load = false ;
       } ,error => {
         this.reterviedImage='';
+        this.load = false ;
       });
     }
 
@@ -120,33 +127,36 @@ export class OrderFoundComponent implements OnInit {
       });
   }
 
-  connected() {
-    this.socket = new SockJS('http://localhost:8081/chat');
-    this.stompClient = Stomp.over(this.socket);
-
-    const _this = this;
-
-    _this.stompClient.connect({}, function(frame) {
-      console.log('................Connected: ' + frame);
-
-      _this.stompClient.subscribe('/topic/mes', function(res) {
-        let data = JSON.parse(res.body);
-        _this.messag.push(data);
-      });
-
-    });
-}
-
-  onsendMessage() {
-    this.stompClient.send('/app/chat', {}, JSON.stringify({content: 'order Acceptted', sender: sessionStorage.getItem('user')}));
-    // this.messsages.reset();
-  }
-
   getCompayData(email:string){
     this.userService.getUser(email).subscribe(data => {
       sessionStorage.setItem("id" , email);
       this.router.navigate([`/company/${data.username}`]);
     });
+  }
+
+  refuse(){
+    this.notifcation.content = "We are sorry . your Order with code "+this.order.code+" doesn't Accept try check your data wasn't correct";
+    this.notifcation.rec = this.order.user.email;
+    this.notifcation.sender = sessionStorage.getItem("user");
+    this.notifcation.accept= false;
+    this.chatMessageService.addNotifications(this.notifcation).subscribe(data => {
+      this.remove(this.order.id , this.order.code);
+      this.router.navigate(['/welcome/admin'])
+    });
+  }
+
+  removeImage(code:number){
+
+    this.http.delete(`https://alafyn20.herokuapp.com/deleteImage/${this.order.code}.jpg`).subscribe(data =>{});
+  }
+
+  remove(id:number , code:number){
+    this.orderService.deleteOrder(id).subscribe(data => {});
+    this.removeImage(code);
+  }
+
+  back(){
+    this.showCompany = false;
   }
 
 }

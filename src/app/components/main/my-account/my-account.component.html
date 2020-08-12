@@ -1,23 +1,22 @@
 
 <div class="page">
   <div class="main">
-    <app-main-nav></app-main-nav>
   <div class="work">
    <div class="things">
      <div class="myaccount active">
-       <a routerLink="/account">
+       <a routerLink="/welcome/account">
         <i class="fa fa-file"></i><br>
         My Account
       </a>
       </div>  
      <div class="order">
-        <a routerLink="/welcome">
+        <a routerLink="/welcome/newOrder">
          <i class="fa fa-truck"></i><br>
          Order Now
        </a>
      </div>
      <div class="myorders">
-      <a routerLink="/myOrders">
+      <a routerLink="/welcome/myOrders">
         <i class="fa fa-table"></i><br>
         My Orders
       </a>
@@ -53,12 +52,12 @@
   <tr *ngFor="let order of orders">
     <td>{{order.code}}</td>
     <td>{{order.time}}</td>
-    <td>{{order.price}}$</td>
+    <td>{{order.price | number : '1.0-0'}}$</td>
   </tr>
   <tr class="tr">
     <td></td>
     <td></td>
-    <td>{{price}}$</td>
+    <td>{{price | number : '1.0-0'}}$</td>
   </tr>
 </table>
   </div>

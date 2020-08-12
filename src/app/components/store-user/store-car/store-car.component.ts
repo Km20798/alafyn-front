@@ -14,11 +14,15 @@ export class StoreCarComponent implements OnInit {
 
   add:boolean=false;
   user:User;
+  load:boolean = true ;
   cars:Car[];
 
   constructor(private carService:CarService , private userService:UserService , private router:Router) { }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.load = false
+    }, 1500);
     this.getUser();
   }
 

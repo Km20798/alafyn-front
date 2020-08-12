@@ -4,6 +4,8 @@ import { User } from 'src/app/models/user.model';
 import { Router } from '@angular/router';
 import { Email } from 'src/app/models/Email.model';
 import { HttpClient } from '@angular/common/http';
+import { Notifications } from 'src/app/models/Notifications.model';
+import { ChatMessageService } from 'src/app/services/chat-message.service';
 
 @Component({
   selector: 'app-indivual',
@@ -60,7 +62,7 @@ export class IndivualComponent implements OnInit {
   retriveRespons:any;
   imp:boolean=false;
   MyMessage:string;
-
+  load:boolean=false;
   // ----------------------- class -----------------
   user:User = {
     id:null , 
@@ -74,7 +76,8 @@ export class IndivualComponent implements OnInit {
     addressDet:''
     },
     role:"ROLE_USER",
-    active:0
+    active:0,
+    card:false
   } 
   email:Email={
     to:this.user.email,
@@ -85,9 +88,17 @@ export class IndivualComponent implements OnInit {
     Thanks for using our Application.:) 
     `
   }
-  
+  notifcation:Notifications={
+    id:null , 
+    content:'',
+    sender:'',
+    rec:'admin@gmail.com',
+    time:new Date(),
+    seen:false,
+    accept:false
+  }
   // -------------------- Methodes
-  constructor(private userService:UserService , private router:Router , private http:HttpClient) { }
+  constructor(private userService:UserService , private router:Router , private http:HttpClient , private chatMessageService:ChatMessageService) { }
 
   ngOnInit(): void {
   }
@@ -123,6 +134,7 @@ export class IndivualComponent implements OnInit {
   sendEmail(){
     this.email.to=this.user.email;
     this.userService.sendEmail(this.email).subscribe(data => {
+      
     })
     return true;
   }
@@ -133,24 +145,33 @@ export class IndivualComponent implements OnInit {
   }
   
   public upload(){
+    this.load = true;
     const uploadImageData = new FormData();
     uploadImageData.append('imageFile' , this.selectedFile , this.user.email);
-    this.http.post(`http://localhost:8081/upload` , uploadImageData , {observe:'response'}).subscribe(data => {
+    this.http.post(`https://alafyn20.herokuapp.com/upload` , uploadImageData , {observe:'response'}).subscribe(data => {
       if(data.status === 200){
-        this.imp = true;
         this.getImage();
       }else{
-        alert("Error in upload")
+        this.imp = false;
+        this.load = false ;
       }
     });
   }
+
+  removeImage(name){
+      this.http.delete(`https://alafyn20.herokuapp.com/deleteImage/${name}.jpg`).subscribe(data => {
+        this.reterviedImage = null;
+      })
+    }
   
   getImage(){
-    this.http.get(`http://localhost:8081/get/${this.user.email}`).subscribe(res => {
+    this.http.get(`https://alafyn20.herokuapp.com/get/${this.user.email}`).subscribe(res => {
+
         this.retriveRespons = res;
         this.base64Data = this.retriveRespons.picBytes;
         this.reterviedImage = 'data:image/jpeg;base64,'+this.base64Data;
-        
+        this.imp = true;
+        this.load = false ;
       } ,error => {
         this.reterviedImage='';
       });
@@ -166,12 +187,14 @@ export class IndivualComponent implements OnInit {
       });
   }
 
+
   saveAccount(){
     console.log(this.theCode);
     if(this.code === this.theCode){
+      this.user.address.addressDet = this.user.address.addressDet +" "+ this.user.address.city+" " + this.user.address.country;
       this.showCode = false ;
       this.userService.createUser(this.user).subscribe(data => {
-        
+        this.sendNotification();
         this.error=true;
         setTimeout(() => {
           this.error=false;
@@ -179,8 +202,21 @@ export class IndivualComponent implements OnInit {
         }, 5000);
       });
      }else{
+       this.removeImage(this.user.email);
       this.MyMessage= "This Email Or This Phone is exit";
      }
   }
 
+  sendNotification(){
+    this.notifcation.content = this.user.username + " create new Account. Please Check this Account's Data !";
+    console.log(this.notifcation.rec)
+    this.notifcation.sender = this.user.email;
+    this.notifcation.accept= null;
+    this.chatMessageService.addNotifications(this.notifcation).subscribe(data => {
+
+    });
+  }
+
 }
+
+

@@ -22,7 +22,8 @@ export class UpdatedataComponent implements OnInit {
     addressDet:''
     },
     role:"ROLE_USER",
-    active:0
+    active:0,
+    card:false
   };
   num:number=1;
   k:number;

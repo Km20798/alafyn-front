@@ -9,38 +9,40 @@ import { StoreComponent } from '../components/register/store/store.component';
 })
 export class OrderService {
 
+  loading:boolean = true ; 
+
   constructor(private http:HttpClient) { }
 
   GetAllOrders(){
-    return this.http.get<Order[]>(`http://localhost:8081/orders`);
+    return this.http.get<Order[]>(`https://alafyn20.herokuapp.com/orders`);
   }
 
   addOrder(email:string ,  order:Order){
-    return this.http.post<Order>(`http://localhost:8081/orders/${email}` , order);
+    return this.http.post<Order>(`https://alafyn20.herokuapp.com/orders/${email}` , order);
   }
 
   findByUser(email:string){
-    return this.http.get<Order[]>(`http://localhost:8081/orders/${email}`);
+    return this.http.get<Order[]>(`https://alafyn20.herokuapp.com/orders/${email}`);
   }
 
   findByCode(email:string , code:number){
-    return this.http.get<Order>(`http://localhost:8081/orders/${email}/${code}`);
+    return this.http.get<Order>(`https://alafyn20.herokuapp.com/orders/${email}/${code}`);
   }
 
   findByTimes(email:string , from:Date , to:Date){
-    return this.http.get<Order[]>(`http://localhost:8081/orders/${email}/${from}/${to}`);
+    return this.http.get<Order[]>(`https://alafyn20.herokuapp.com/orders/${email}/${from}/${to}`);
   }
 
   updateOrder(id:number , order:Order){
-    return this.http.put<Order>(`http://localhost:8081/orders/${id}`, order);
+    return this.http.put<Order>(`https://alafyn20.herokuapp.com/orders/${id}`, order);
   }
 
   deleteOrder(id:number){
-    return this.http.delete(`http://localhost:8081/orders/${id}`);
+    return this.http.delete(`https://alafyn20.herokuapp.com/orders/${id}`);
   }
 
   getAllOrderByCampany(email:string){
-    return this.http.get<Order[]>(`http://localhost:8081/orders/stores/${email}`);
+    return this.http.get<Order[]>(`https://alafyn20.herokuapp.com/orders/stores/${email}`);
   }
 
 }

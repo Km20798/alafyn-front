@@ -13,7 +13,8 @@ export class OrdersComponent implements OnInit {
   orders:Order[];
   code:number;
 
-  constructor(private orderService:OrderService , private router:Router) { }
+  constructor(private orderService:OrderService , private router:Router) {
+   }
 
   ngOnInit(): void {
     this.getAllOrders();

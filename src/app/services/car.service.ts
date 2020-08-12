@@ -10,19 +10,19 @@ export class CarService {
   constructor(private http:HttpClient) { }
 
   getCarByUser(email:string){
-    return this.http.get<Car[]>(`http://localhost:8081/cars/${email}`);
+    return this.http.get<Car[]>(`https://alafyn20.herokuapp.com/cars/${email}`);
   }
 
   addCar(car:Car){
-    return this.http.post<Car>(`http://localhost:8081/cars` , car);
+    return this.http.post<Car>(`https://alafyn20.herokuapp.com/cars` , car);
   }
 
   getCar(email:string , id:number){
-    return this.http.get<Car>(`http://localhost:8081/cars/${email}/${id}`);
+    return this.http.get<Car>(`https://alafyn20.herokuapp.com/cars/${email}/${id}`);
   }
 
   deleteCar(id:number){
-    return this.http.delete(`http://localhost:8081/cars/${id}`);
+    return this.http.delete(`https://alafyn20.herokuapp.com/cars/${id}`);
   }
 
   

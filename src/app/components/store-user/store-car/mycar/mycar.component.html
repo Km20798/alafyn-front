@@ -1,5 +1,6 @@
 <app-store-nav></app-store-nav>
 <div class="container">
+  <button class="btn btn-success bbtn" (click)="GetAllCar()"> Get All Cars</button>
   <div class="row">
     <div class="data">
       <div class="header">
@@ -9,7 +10,10 @@
           <button class="btn btn-info" (click)="edit(car.id)">Edit</button>
         </div>
       </div>
-      <div class="detailes">
+      <div class="wating" *ngIf="load">
+        <div class="loading"></div>
+      </div>
+      <div class="detailes" *ngIf="!load">
         <div class="info">
           <h5>This Car Belongs to <a href="/">{{user.username}}</a></h5>
           <h6>this Type is {{car.type}}</h6>

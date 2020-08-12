@@ -1,0 +1,21 @@
+<app-admin-nav></app-admin-nav>
+<div class="main">
+  <div class="nav">
+    <h5>Notifications</h5>
+  </div>
+  <div class="work">
+    <div class="not" *ngFor="let notification of notifications">
+      <div class="noto" [ngClass]="{refuse: notification.accept === false}">
+        <div class="cont">
+          <div class="d1">
+           <p class="header">
+            {{notification.sender}}
+          </p>
+          <p class="contant">-{{notification.content}} </p>
+          </div>
+           <p class="time">{{notification.time| date:'short'}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

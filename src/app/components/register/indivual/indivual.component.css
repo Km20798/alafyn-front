@@ -8,8 +8,8 @@ img{
 .area{
   background-color: white;
   height: 100%;
-  width: 80%;
-  margin-left: 10%;
+  width: 70%;
+  margin-left: 15%;
 }
 .message{
   background-color: tomato;
@@ -25,7 +25,7 @@ img{
   display: flex;
 }
 
-.button-wrap{
+.button-wrapp{
   justify-content: center;
   align-items: center;
   width: 80%;
@@ -36,7 +36,7 @@ img{
   margin-bottom: 30%;
   margin-right: 5%;
 }
-.button-wrap .label{
+.button-wrapp .label{
   padding-left: 30;
   font-size: 15px;
   font-weight: bold;
@@ -46,8 +46,9 @@ h6{
   padding-top: 10%;
   color: #123;
 }
-.wrap{
-  width: 100%;
+.wrapp{
+  width: 80%;
+  margin-left: 10%;
   height: 100%;
   background-color: #d4cbcb;
   border-radius: 10px;
@@ -348,3 +349,52 @@ h1 span:nth-child(18){
 h1 span:nth-child(19){
   color: tomato;
 }
+.wating{
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+}
+.loading{
+  width: 50px;
+  height: 50px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border-top: 10px solid #e74c3c;
+  position: relative;
+  animation: a1 2s linear infinite;
+}
+.loading::before,.loading::after{
+  content: '';
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  left: 0;  
+  top: -10px;
+  box-sizing: border-box;
+  border-radius: 50%;
+}
+.loading::before{
+  border-top: 10px solid #e67e22;
+  transform: rotate(120deg);
+}
+.loading::after{
+  border-top: 10px solid #3498db;
+  transform: rotate(270deg);
+}
+@keyframes a1{
+  to{
+    transform: rotate(360deg);
+  }
+}
+@keyframes a2{
+  to{
+    transform: rotate(-360deg);
+  }
+}
+input:focus{outline: none;}
+a:focus{outline:none;}
+button:focus{outline:none;}
+select:focus{outline:none;}

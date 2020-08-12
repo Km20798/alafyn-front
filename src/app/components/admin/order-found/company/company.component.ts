@@ -7,6 +7,8 @@ import { Order } from 'src/app/models/Order.model';
 import { OrderService } from 'src/app/services/order.service';
 import * as SockJS from 'sockjs-client';
 import * as Stomp from 'stompjs';
+import { Notifications } from 'src/app/models/Notifications.model';
+import { ChatMessageService } from 'src/app/services/chat-message.service';
 
 @Component({
   selector: 'app-company',
@@ -24,6 +26,7 @@ export class CompanyComponent implements OnInit {
   reterviedImage4:any;
   personalImage:any;
   det:boolean=false;
+  load:boolean = false;
   user:User = {
     id:null , 
     username:'',
@@ -36,53 +39,66 @@ export class CompanyComponent implements OnInit {
     addressDet:''
     },
     role:'',
-    active:0
+    active:0,
+    card:false
   }
   order:Order;
   stompClient: any;
    socket: any;
    messag = [];
+   notifcation:Notifications={
+    id:null , 
+    content:'',
+    sender:'',
+    rec:'kmaged207@gmail.com',
+    time:new Date(),
+    seen:false,
+    accept:false
+  }
 
-  constructor(private http:HttpClient , private userService:UserService ,private router:Router , private orderService:OrderService) { }
+  constructor(private http:HttpClient , private userService:UserService ,private router:Router , private orderService:OrderService , private cm:ChatMessageService) { }
 
   ngOnInit(): void {
     this.getUser();
   }
-
-  connected() {
-    this.socket = new SockJS('http://localhost:8081/chat');
-    this.stompClient = Stomp.over(this.socket);
-
-    const _this = this;
-
-    _this.stompClient.connect({}, function(frame) {
-      console.log('................Connected: ' + frame);
-
-      _this.stompClient.subscribe('/topic/mes', function(res) {
-        let data = JSON.parse(res.body);
-        _this.messag.push(data);
-      });
-
-    });
-}
-
   onsendMessage() {
     this.stompClient.send('/app/chat', {}, JSON.stringify({content: 'order Acceptted', sender: sessionStorage.getItem('user')}));
   }
 
   showInfo(){
-    this.det = true ;
+    this.det = !this.det ;
   }
   back(){
-
+    this.router.navigate([`/search/${sessionStorage.getItem("code")}`])
   }
   okay(){
     this.order.ok = true;
     this.order.company = this.user.email;
     this.orderService.updateOrder(this.order.id , this.order).subscribe(data => {
-      this.onsendMessage()   
+      this.accept();
+      this.sendToCompany();
       this.router.navigate(['/orders']);
     })
+  }
+
+  sendToCompany(){
+    this.notifcation.content = "Please Check this Order  with Code "+this.order.code+" to finish it";
+    this.notifcation.rec = this.user.email;
+    this.notifcation.sender = sessionStorage.getItem("user");
+    this.notifcation.accept= true;
+    this.cm.addNotifications(this.notifcation).subscribe(data => {
+      this.router.navigate(['/welcome/admin'])
+    });
+  }
+
+  accept(){
+    this.notifcation.content = "Congratulation your Order by code "+this.order.code +" accepted successfully";
+    console.log(this.notifcation.rec)
+    this.notifcation.sender = sessionStorage.getItem("user");
+    this.notifcation.accept= true;
+    this.cm.addNotifications(this.notifcation).subscribe(data => {
+      
+    });
   }
 
   findOrder(){
@@ -109,7 +125,6 @@ export class CompanyComponent implements OnInit {
 
   getUser(){
     this.userService.getUser(sessionStorage.getItem("id")).subscribe(data => {
-      this.connected();
       this.user = data;
       this.findOrder();
       this.getImage();
@@ -123,9 +138,10 @@ export class CompanyComponent implements OnInit {
   }
 
   getImage(){
-    let names = ['card-front' , 'card-back' , 'record-front' , 'record-back' , '']
+    this.load = true ;
+    let names = ['card-front' , 'card-back' , 'record-front' , 'record-back' , 'logo']
     names.forEach(element => {
-      this.http.get(`http://localhost:8081/get/${this.user.email}${element}`).subscribe(res => {
+      this.http.get(`https://alafyn20.herokuapp.com/get/${this.user.email}${element}`).subscribe(res => {
         this.retriveRespons = res;
         this.base64Data = this.retriveRespons.picBytes;
         if(element === "card-front"){
@@ -136,11 +152,13 @@ export class CompanyComponent implements OnInit {
           this.reterviedImage3 = 'data:image/jpeg;base64,'+this.base64Data;
         }else if(element === "record-back"){
           this.reterviedImage4 = 'data:image/jpeg;base64,'+this.base64Data;
-        }else if(element === ''){
+        }else if(element === 'logo'){
           this.personalImage = 'data:image/jpeg;base64,'+this.base64Data;
+          this.load = false;
         }
       } ,error => {
         this.reterviedImage='';
+        this.load = false ;
       });
     });
     

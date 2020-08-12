@@ -19,7 +19,7 @@ export class EditCarComponent implements OnInit {
   reterviedImage:any;
   user:User;
   car:Car={id:null,type:'',driver:'',phone:'',user:null};
-
+  load:boolean=true ;
 
 
 
@@ -41,7 +41,10 @@ export class EditCarComponent implements OnInit {
   }
 
   getUser(){
-    this.userService.getUser(sessionStorage.getItem("user")).subscribe(data => {this.user=data;this.getData();});
+    this.userService.getUser(sessionStorage.getItem("user")).subscribe(data => {
+      this.user=data;this.getData();
+      this.load = false;
+    });
   }
 
   showImage(){
@@ -58,7 +61,7 @@ export class EditCarComponent implements OnInit {
   public upload(){
     const uploadImageData = new FormData();
     uploadImageData.append('imageFile' , this.selectedFile , this.car.phone);
-    this.http.post(`http://localhost:8081/upload` , uploadImageData , {observe:'response'}).subscribe(data => {
+    this.http.post(`https://alafyn20.herokuapp.com/upload` , uploadImageData , {observe:'response'}).subscribe(data => {
       if(data.status === 200){
         this.getImage();
       }else{
@@ -68,7 +71,7 @@ export class EditCarComponent implements OnInit {
   }
 
   getImage(){
-    this.http.get(`http://localhost:8081/get/${this.car.phone}`).subscribe(res => {
+    this.http.get(`https://alafyn20.herokuapp.com/get/${this.car.phone}`).subscribe(res => {
         this.retriveRespons = res;
         this.base64Data = this.retriveRespons.picBytes;
         this.reterviedImage = 'data:image/jpeg;base64,'+this.base64Data;
@@ -79,6 +82,6 @@ export class EditCarComponent implements OnInit {
     }
 
     deleteImage(){
-      this.http.delete(`http://localhost:8081/deleteImage/${this.car.phone}`).subscribe(data => {this.reterviedImage=''});
+      this.http.delete(`https://alafyn20.herokuapp.com/deleteImage/${this.car.phone}`).subscribe(data => {this.reterviedImage=''});
     }
 }

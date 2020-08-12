@@ -15,12 +15,11 @@ export class AuthService {
 
   excuteJWTAuthenticationServices(username , password){
    
-    return this.http.post<any>(`http://localhost:8081/sigin` ,{username , password}).pipe(
+    return this.http.post<any>(`https://alafyn20.herokuapp.com/sigin` ,{username , password}).pipe(
       map(
         data => {
           sessionStorage.setItem("user" , username);
           sessionStorage.setItem("token" , `Bearer ${data.token}`);
-          
           return data;
         }
       )
@@ -32,7 +31,7 @@ excuteAuthenticationServices(username , password){
   let headers = new HttpHeaders({
     Authorization: basicHeader
   });
-  return this.http.get<User>(`http://localhost:8081/users/${username}/${password}` , {headers}).pipe(
+  return this.http.get<User>(`https://alafyn20.herokuapp.com/users/${username}/${password}` , {headers}).pipe(
     map(
       data => {
         sessionStorage.setItem("user" , username);
@@ -57,6 +56,8 @@ isUserLogin(){
 logout(){
   sessionStorage.removeItem("user");
   sessionStorage.removeItem("token");
+  sessionStorage.removeItem("id");
+  sessionStorage.removeItem("code");
 }
 
 }

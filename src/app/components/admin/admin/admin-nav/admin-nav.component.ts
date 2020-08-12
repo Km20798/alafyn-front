@@ -5,6 +5,7 @@ import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user.model';
 import { OrderService } from 'src/app/services/order.service';
 import { HttpClient } from '@angular/common/http';
+import { ChatMessageService } from 'src/app/services/chat-message.service';
 
 @Component({
   selector: 'app-admin-nav',
@@ -25,17 +26,26 @@ export class AdminNavComponent implements OnInit {
     addressDet:''
     },
     role:"ROLE_USER",
-    active:0
+    active:0,
+    card:false
   }
   code:number=null;
   reterviedImage:any;
   base64Data:any;
   retriveRespons:any;
+  num:number;
 
-  constructor(private userService:UserService , private router:Router , private orderService:OrderService , private auth:AuthService , private http:HttpClient) { }
+  constructor(private userService:UserService , private router:Router , private orderService:OrderService , private auth:AuthService , private http:HttpClient , private cms:ChatMessageService ) { }
 
   ngOnInit(): void {
     this.getUser()
+    this.getNotificationNotRead();
+  }
+
+  getNotificationNotRead(){
+    this.cms.getNotSeen("admin@gmail.com" , false).subscribe(data => {
+      this.num = data.length;
+    })
   }
 
   getImage(){
@@ -60,5 +70,10 @@ export class AdminNavComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  getNotification(){
+    this.router.navigate(['/admin/notification']);
+    this.num = null ;
+    console.log(this.num)
+  }
   
 }

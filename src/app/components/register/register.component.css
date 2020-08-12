@@ -54,3 +54,6 @@ a{
 p{
   margin-top: -40px;
 }
+input:focus{outline: none;}
+a:focus{outline:none;}
+button:focus{outline: none;}

@@ -23,7 +23,8 @@ export class MyAccountComponent implements OnInit {
       addressDet:''
     },
     role:'',
-    active:0
+    active:0,
+    card:false
   }
   from:Date ;
   to:Date ;

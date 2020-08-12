@@ -1,0 +1,25 @@
+<app-store-nav></app-store-nav>
+<div class="page">
+  <div class="wating" *ngIf="load">
+    <div class="loading"></div>
+  </div>
+  <div class="work" *ngIf="!load">
+    <div class="working">
+      <h5>notifications</h5>
+    </div>
+    <div class="not" *ngFor="let notification of notifications">
+      <div class="noto">
+        <div class="cont">
+          <div class="d1">
+           <p class="header">
+            {{notification.sender}}
+          </p>
+          <p class="contant">-{{notification.content}} </p>
+          </div>
+           <p class="time">{{notification.time| date:'short'}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  

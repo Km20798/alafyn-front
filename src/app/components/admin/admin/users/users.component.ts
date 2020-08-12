@@ -23,7 +23,8 @@ export class UsersComponent implements OnInit {
     addressDet:''
     },
     role:"ROLE_USER",
-    active:0
+    active:0,
+    card:false
   }
   email:string;
   username:string;

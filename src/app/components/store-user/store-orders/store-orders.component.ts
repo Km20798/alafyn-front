@@ -13,6 +13,7 @@ export class StoreOrdersComponent implements OnInit {
   orders:Order[];
   Orders:Order[];
   done:boolean = true;
+  load:boolean=true ;
 
   constructor(private orderService:OrderService , private router:Router ) { }
 
@@ -24,13 +25,16 @@ export class StoreOrdersComponent implements OnInit {
     this.orderService.getAllOrderByCampany(sessionStorage.getItem("user")).subscribe(data => {
       this.orders = [];
       this.Orders = [];
-      data.forEach(element => {
-        if(element.done === true){
-          this.orders.unshift(element);
-        }else{
-          this.Orders.unshift(element);
-        }
-      });
+      if(data !== null){
+        data.forEach(element => {
+          if(element.done === true){
+            this.orders.unshift(element);
+          }else{
+            this.Orders.unshift(element);
+          }
+        });
+      }
+      this.load = false;
     });
   }
 

@@ -4,6 +4,8 @@ import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { Email } from 'src/app/models/Email.model';
 import { User } from 'src/app/models/user.model';
+import { ChatMessageService } from 'src/app/services/chat-message.service';
+import { Notifications } from 'src/app/models/Notifications.model';
 
 @Component({
   selector: 'app-store',
@@ -72,6 +74,7 @@ export class StoreComponent implements OnInit {
   showImagePerson:boolean = false;
   impPerson:boolean = false;
   codev:number;
+  load:boolean = false ;
   //----------------- classes  ----------------------
   user:User = {
     id:null , 
@@ -80,12 +83,13 @@ export class StoreComponent implements OnInit {
     password:'',
     phone:'',
     address:{
-    city:'',
+    city:'0',
     country:'0',
     addressDet:''
     },
     role:"ROLE_USER",
-    active:0
+    active:0,
+    card:false
   }
   email:Email={
     to:this.user.email,
@@ -98,9 +102,21 @@ export class StoreComponent implements OnInit {
     Thanks for using our Application.:) 
     `
   }
+  notifcation:Notifications={
+    id:null , 
+    content:'',
+    sender:'',
+    rec:'admin@gmail.com',
+    time:new Date(),
+    seen:false,
+    accept:false
+  }
+  
+  
   //--------------------------- Methods -------------------------- 
 
-  constructor(private userService:UserService , private router:Router , private http:HttpClient) { }
+  constructor(private userService:UserService , private router:Router , private http:HttpClient , 
+    private chatMessageService:ChatMessageService) { }
 
   ngOnInit(): void {
   }
@@ -133,6 +149,7 @@ export class StoreComponent implements OnInit {
   }
    
   getCompanyImage(){
+    this.load = false;
     if(this.sendEmail()){
       this.showImagePerson = true ;
     }
@@ -146,15 +163,15 @@ export class StoreComponent implements OnInit {
   }
 
   saveAccount(){
-    console.log("fuck you man");
-    console.log(this.codev);
-    console.log(this.code);
     if(Number(this.code) === Number(this.codev)){
       this.showCode = false ;
+      this.load = true ;
       this.user.role = 'ROLE_STORE';
       this.userService.createUser(this.user).subscribe(data => {
+        this.sendNotification()
         this.user = data;
         this.error=true;
+        this.load = false;
         setTimeout(() => {
           this.error=false;
           this.router.navigate(['/login']);
@@ -173,8 +190,9 @@ export class StoreComponent implements OnInit {
   public upload(name:string){
     const uploadImageData = new FormData();
     uploadImageData.append('imageFile' , this.selectedFile , this.user.email+name);
+    
 
-    this.http.post(`http://localhost:8081/upload` , uploadImageData , {observe:'response'}).subscribe(data => {
+    this.http.post(`https://alafyn20.herokuapp.com/upload` , uploadImageData , {observe:'response'}).subscribe(data => {
       if(data.status === 200){
         if(name === "card-front"){  
           this.img1 = true;
@@ -184,7 +202,8 @@ export class StoreComponent implements OnInit {
           this.img3 = true;
         }else if(name === "record-back"){
           this.img4 = true;
-        }else if(name === ''){
+        }else if(name === 'logo'){
+          this.load = true ;
           this.impPerson = true;
         }
         this.imp = false;
@@ -192,11 +211,13 @@ export class StoreComponent implements OnInit {
       }else{
         alert("Error in upload")
       }
+    } , error => {
+      console.log("fuck you")
     });
   }
   
   getImage(name:String){
-    this.http.get(`http://localhost:8081/get/${this.user.email}${name}`).subscribe(res => {
+    this.http.get(`https://alafyn20.herokuapp.com/get/${this.user.email}${name}`).subscribe(res => {
         this.retriveRespons = res;
         this.base64Data = this.retriveRespons.picBytes;
         if(name === "card-front"){
@@ -207,12 +228,23 @@ export class StoreComponent implements OnInit {
           this.reterviedImage3 = 'data:image/jpeg;base64,'+this.base64Data;
         }else if(name === "record-back"){
           this.reterviedImage4 = 'data:image/jpeg;base64,'+this.base64Data;
-        }else if(name === this.user.email){
+        }else if(name === "logo"){
           this.personalImage = 'data:image/jpeg;base64,'+this.base64Data;
+          this.load = false ;
         }
         
       } ,error => {
         this.reterviedImage='';
+      });
+    }
+
+    sendNotification(){
+      this.notifcation.content = this.user.username + " create new Account. Please Check this Account's Data !";
+      console.log(this.notifcation.rec)
+      this.notifcation.sender = this.user.email;
+      this.notifcation.accept= null;
+      this.chatMessageService.addNotifications(this.notifcation).subscribe(data => {
+  
       });
     }
 

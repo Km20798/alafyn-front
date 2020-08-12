@@ -1,0 +1,50 @@
+.nav{
+  padding: 3% 5% 2%;
+  color: white;
+  background-color: #b9b5b6;
+}
+.work{
+  background-color: white;
+  margin-left: 10%;
+  width: 80%;
+}
+
+.not{
+  margin-top: 5%;
+  width: 100%;
+}
+.noto{
+  width: 100%;
+  border: 1px solid #13b724;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #14ea65;
+}
+.refuse{
+  border: 1px solid #ef3057;
+  color: white;
+  background-color: #ef3057;
+}
+.cont{
+  width: 90%;
+  margin-left: 5%;
+}
+.header{
+  margin-bottom: 0;
+  font-weight: bolder;
+  color: #13138a;
+}
+.contant{
+  margin-left: 35%;
+  font-weight: bold; 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-style: italic;
+}
+.d1{  
+  float: left;
+  width: 85%;
+  height: 100%;
+}
+.time{
+  color: dimgrey;
+}

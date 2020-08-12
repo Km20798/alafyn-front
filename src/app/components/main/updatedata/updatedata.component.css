@@ -1,4 +1,10 @@
+.do{
+  width: 100%;
+  background-color: #040450;
+}
 .page{
+  width: 90%;
+  margin-left: 5%;
   background-color: #00a1ff;
   height: 100vh;
 }
@@ -11,7 +17,7 @@
 .form{
   position: fixed;
   top: 40%;
-  left: 30%;
+  left: 20%;
   width: 100%;
 }
 input{
@@ -21,7 +27,12 @@ input{
   border: none;
   text-align: center;
 }
-
+input:focus{
+  outline: none;
+}
+button:focus{
+  outline: none;
+}
 .username , .email , .phone , .password , .city , .country , .full , .btnbtn{
   padding-left: 2%;
   border: 1px solid white;

@@ -1,14 +1,25 @@
-<div class="nav">
+
+<div class="work">
   <nav>
-    <div class="logo">
-      <a routerLink="/welcome"><img src="../../../../assets/img/logo.png" alt=""></a>
-    </div>
-    <div class="info">
+    <a routerLink="/welcome/newOrder"><img src="../../../../assets/img/logo.png" alt=""></a>
+    <div class="data">
       <ul class="ul">
         <li (click)="remove()">
-          <button>
-            <i class="fa fa-bell"></i>
+          <button (click)="getNewNotifactions()">
+            <i class="fa fa-bell"><span class="badge badge-primary" *ngIf="numNot !== 0">{{numNot}}</span></i>
           </button>
+          <dialog class="notifcation" open *ngIf="showNot">
+            <div class="header">
+              <i class="fa fa-bell"></i> &nbsp;&nbsp;&nbsp;
+              <span>New Notifications</span> 
+            </div>
+            <div class="containt">
+              <div class="body" *ngFor="let notification of notifcations">
+                <img src="../../../../assets/img/admin.jpg" alt="">&nbsp;&nbsp;&nbsp;
+                <p>{{notification.content}}</p>
+              </div>
+            </div>
+          </dialog>
         </li>
         <li>
           <button (click)="click()">
@@ -17,13 +28,12 @@
             </a>
           </button>
         </li>
-      
       </ul>
       <dialog open *ngIf="show">
         <ul>
-          <li><a routerLink="/notifications">Notifications</a></li>
-          <li><a routerLink="/myWallet">My Wallet</a></li>
-          <li><a routerLink="/myProfile">My Profile</a></li>
+          <li><a routerLink="/welcome/notifications" (click)="show = false">Notifications</a></li>
+          <li><a routerLink="/welcome/myWallet" (click)="show = false">My Wallet</a></li>
+          <li><a routerLink="/welcome/myProfile" (click)="show = false">My Profile</a></li>
           <li><button (click)="logout()">Logout</button></li>
         </ul>  
       </dialog>

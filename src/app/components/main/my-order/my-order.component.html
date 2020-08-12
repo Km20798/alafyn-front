@@ -1,23 +1,22 @@
 
 <div class="page">
   <div class="main">
-    <app-main-nav></app-main-nav>
   <div class="work">
    <div class="things">
      <div class="myaccount">
-       <a routerLink="/account">
+       <a routerLink="/welcome/account">
         <i class="fa fa-file"></i><br>
         My Account
       </a>
       </div>
      <div class="order">
-        <a routerLink="/welcome">
+        <a routerLink="/welcome/newOrder">
          <i class="fa fa-truck"></i><br>
          Order Now
        </a>
      </div>
      <div class="myorders active">
-      <a routerLink="/myOrders">
+      <a routerLink="/welcome/myOrders">
         <i class="fa fa-table"></i><br>
         My Orders
       </a>
@@ -86,12 +85,21 @@
     </table>
   </div>
   
-
-  <div class="show" *ngIf="show">
-  <div class="img">
-    <img [src]="reterviedImage" alt="image">
+  <div class="wati" *ngIf="loaded">
+    <div class="loading">
+      <span>loading...</span>
+    </div>
   </div>
-  <div class="myorder">
+  <div class="show" *ngIf="show" >
+  <div class="img" *ngIf="!loaded">
+    <img *ngIf="reterviedImage" [src]="reterviedImage" alt="image">
+    <div class="wating" *ngIf="load">
+      <div class="loading">
+        <span>loading...</span>
+      </div>
+    </div>
+  </div>
+  <div class="myorder" *ngIf="!loaded">
     <div class="data">
       <h2>{{order.code}}</h2>
       <table>
@@ -125,7 +133,7 @@
         </tr>
         <tr>
           <th>Price</th>
-          <td>{{order.price}} L.E</td>
+          <td>{{order.price | number : '1.0-0'}} L.E</td>
         </tr>
         
         <tr>

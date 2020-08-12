@@ -4,73 +4,42 @@
     <div class="col-md-7 ">
 <div class="panel panel-default">
    <div class="panel-body">
-    <div class="box box-info">
-            <div class="box-body" >
-                     <div class="col-sm-6 ib" >
-                     <div  align="center"> <img alt="User Pic" [src]="personalImage" id="profile-image1" class="img-circle"> 
-                
-                     </div>
-              
-              <br>
-    
-              <!-- /input-group -->
-            </div>
-            
-            <div class="clearfix"></div>
-    
-              
-<div class="col-sm-5 col-xs-3 tital " >  <i class="fa fa-user" aria-hidden="true"></i>UserName:</div><div class="col-sm-7 col-xs-6 ">{{user.username}}</div>
-     <div class="clearfix"></div>
-<div class="bot-border"></div>
-
-
-<div class="col-sm-5 col-xs-6 tital " > <i class="fa fa-envelope" aria-hidden="true"></i> Email:</div><div class="col-sm-7 col-xs-6 "> <a style="color: blue;">{{user.email}}</a></div>
-
-  <div class="clearfix"></div>
-<div class="bot-border"></div>
-
-<div class="col-sm-5 col-xs-6 tital " ><i class="fa fa-phone" aria-hidden="true"></i>Phone:</div><div class="col-sm-7">{{user.phone}}</div>
-
-  <div class="clearfix"></div>
-<div class="bot-border"></div>
-
-<div class="col-sm-5 col-xs-6 tital " ><i class="fa fa-home" aria-hidden="true"></i>Addresss:</div>
-<div class="col-sm-7"><label for="country" >Goverment:- </label>{{user.address.country}}</div>
-<div class="col-sm-7"><label for="city">City :- </label>{{user.address.city}}</div>
-<div class="col-sm-7"><label for="addressDet" >Detailes Of Address:- </label>{{user.address.addressDet}}</div>
-
- <div class="clearfix"></div>
-<div class="bot-border"></div>
-
-
-
-
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-
-        </div>
+    <div class="wating" *ngIf="load">
+      <div class="loading"></div>
     </div>
-</div>
-
-            
-    </div> 
-    </div>
-</div>  
-       
-         
-<div class="container ">
-  <div class="con">
-    <div class="col-sm-5 col-xs-6 img">
-      <img [src]="reterviedImage" class="im"></div>
-    <div class="col-sm-5 col-xs-6 img">
-      <img [src]="reterviedImage2" class="im"></div>
-    <div class="col-sm-5 col-xs-6 img">
-      <img [src]="reterviedImage3" class="im"></div>
-    <div class="col-sm-5 col-xs-6 img">
-      <img [src]="reterviedImage4" class="im"> 
+    <div class="information" *ngIf="!load">
+      <img src="../../../../assets/img/karim.jpg" alt="">
+      <table>
+          <tr>
+            <th>Username</th>
+            <td>{{user.username}}</td>
+          </tr>
+          <tr>
+            <th>Email</th>
+            <td>{{user.email}}</td>
+          </tr>
+          <tr>
+            <th>Phone</th>
+            <td>{{user.phone}}</td>
+          </tr>
+          <tr>
+            <th>Address</th>
+            <td>{{user.address.country}} {{user.address.city}} {{user.address.addressDet}} </td>
+          </tr>
+      </table>
+      </div>
+  <div class="container " *ngIf="!load">
+    <div class="con">
+      <div class="col-sm-5 col-xs-6 img">
+        <img [src]="reterviedImage" class="im"></div>
+      <div class="col-sm-5 col-xs-6 img">
+        <img [src]="reterviedImage2" class="im"></div>
+      <div class="col-sm-5 col-xs-6 img">
+        <img [src]="reterviedImage3" class="im"></div>
+      <div class="col-sm-5 col-xs-6 img">
+        <img [src]="reterviedImage4" class="im"> 
+      </div>
     </div>
   </div>
-</div>
        
        

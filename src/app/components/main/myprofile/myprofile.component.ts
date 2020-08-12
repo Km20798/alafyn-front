@@ -22,7 +22,8 @@ export class MyprofileComponent implements OnInit {
       addressDet:''
     },
     role:'',
-    active:0  
+    active:0,
+    card:false
   };
   imageName:any;
   selectedFile:File;
@@ -31,10 +32,14 @@ export class MyprofileComponent implements OnInit {
   base64Data:any;
   retriveRespons:any;
   imp:boolean=false;
+  show:boolean = true;
 
   constructor(private userService:UserService , private http : HttpClient) { }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.show = false;
+    }, 9000);
     this.getUser();
   }
 
@@ -46,12 +51,13 @@ export class MyprofileComponent implements OnInit {
   public upload(){
 
     if(this.reterviedImage !== null){
-      this.http.delete(`http://localhost:8081/deleteImage/${this.user.email}`).subscribe(data => {});
+      console.log("koko")
+      this.http.delete(`https://alafyn20.herokuapp.com/deleteImage/${this.user.email}.jpg`).subscribe(data => {console.log("koko")});
     }
 
     const uploadImageData = new FormData();
     uploadImageData.append('imageFile' , this.selectedFile , this.user.email);
-    this.http.post(`http://localhost:8081/upload` , uploadImageData , {observe:'response'}).subscribe(data => {
+    this.http.post(`https://alafyn20.herokuapp.com/upload` , uploadImageData , {observe:'response'}).subscribe(data => {
       if(data.status === 200){
         this.imp = false;
         this.getImage();
@@ -73,7 +79,7 @@ export class MyprofileComponent implements OnInit {
   }
 
   getImage(){
-    this.http.get(`http://localhost:8081/get/${this.user.email}`).subscribe(res => {
+    this.http.get(`https://alafyn20.herokuapp.com/get/${this.user.email}`).subscribe(res => {
         if(res !== null){
           this.retriveRespons = res;
           this.base64Data = this.retriveRespons.picBytes;

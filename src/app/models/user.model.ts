@@ -11,4 +11,5 @@ export class User{
 };
 role:string;
 active:number;
+card:boolean;
 }

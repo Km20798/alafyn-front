@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
       loading:boolean =false ;
       id:number;
       error: string;
+      load:boolean = false ;
       //------------------ class --------------
       user : User = {
         id:null , 
@@ -32,7 +33,8 @@ export class LoginComponent implements OnInit {
           addressDet:''
         },
         role:'',
-        active:0
+        active:0,
+        card:false
       }
       //------------------ Methods ------------------------
       constructor(private userService:UserService , private router:Router , private auth:AuthService ) { }
@@ -49,12 +51,14 @@ export class LoginComponent implements OnInit {
         this.error = 'please Enter your Passsword';
       }
    }else{
+     this.load = true ;
     this.auth.excuteJWTAuthenticationServices(this.email , this.password).subscribe(data =>{
+      this.load = false ;
       this.loading = true ;
       setTimeout(() => {
         this.userService.getUser(this.email).subscribe(data => {
           if(data.role === "ROLE_USER"){
-            this.router.navigate(['/welcome']);
+            this.router.navigate(['/welcome/newOrder']);
           }else if(data.role === "ROLE_ADMIN"){
             this.router.navigate(['/welcome/admin']);
           }else if(data.role === "ROLE_STORE"){
@@ -66,6 +70,7 @@ export class LoginComponent implements OnInit {
       }, 1000);
       
     },error => {
+      this.load = false ;
       this.error = "Invalid User";
       this.email=null;
       this.password=null; 

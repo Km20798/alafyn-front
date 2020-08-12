@@ -1,3 +1,9 @@
+.bbtn{
+  position: fixed;
+  top: 15%;
+  left: 28%;
+  width: 40%;
+}
 .data{
   margin-top: 10%;
   margin-left: 10%;
@@ -25,6 +31,7 @@
   padding-left: 5%;
   padding-top: 2%;
   color: steelblue;
+  
 }
 .info{
   width: 40%;
@@ -45,4 +52,52 @@ img{
 }
 .remove{
   margin-right: 3%;
+}
+.wating{
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+}
+.loading{
+  width: 100px;
+  height: 100px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border-top: 10px solid #e74c3c;
+  position: relative;
+  left: -50%;
+  margin-top: 20%;
+  margin-bottom: 20%;
+  animation: a1 2s linear infinite;
+}
+.loading::before,.loading::after{
+  content: '';
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  left: 0;  
+  top: -10px;
+  box-sizing: border-box;
+  border-radius: 50%;
+}
+.loading::before{
+  border-top: 10px solid #e67e22;
+  transform: rotate(120deg);
+}
+.loading::after{
+  border-top: 10px solid #3498db;
+  transform: rotate(270deg);
+}
+@keyframes a1{
+  to{
+    transform: rotate(360deg);
+  }
+}
+@keyframes a2{
+  to{
+    transform: rotate(-360deg);
+  }
 }

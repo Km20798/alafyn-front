@@ -3,6 +3,9 @@
   <div class="work">
     <div class="img">
       <img [src]="reterviedImage" alt="">
+      <div class="wating" *ngIf="load">
+        <div class="loading"></div>
+      </div>
     </div>
     <div class="data">
       <h2>{{order.code}}</h2>
@@ -54,15 +57,19 @@
         </tr>
         <br>
         <tr>
-          <td></td>
-          <td><button class="btn btn-success" (click)="getCompany(order.pickup_Location)" *ngIf="order.ok === false">Okay</button></td>
+          <td>
+            <button class="btn btn-danger " (click)="refuse()" *ngIf="order.ok === false">Refuse</button>
+          </td>
+          <td>
+            <button class="btn btn-success" (click)="getCompany(order.pickup_Location)" *ngIf="order.ok === false">Accept</button>
+          </td>
         </tr>
       </table>
     </div>
-    <button (click)="onsendMessage()">send</button>
   </div>
 </div>
 <div class="company" *ngIf="showCompany">
+  <i class="fa fa-remove" (click)="back()"></i>
   <h2>Choose The Company please ! </h2>
   <div class="activeCopmpany" *ngFor="let user of users">
      <h4>{{user.username}}</h4>

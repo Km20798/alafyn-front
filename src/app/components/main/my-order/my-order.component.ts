@@ -34,7 +34,7 @@ export class MyOrderComponent implements OnInit {
     user:null
   };
   show:boolean=false;
-
+  load:boolean = false ;
   imageName:any;
   selectedFile:File;
   reterviedImage:any;
@@ -45,9 +45,11 @@ export class MyOrderComponent implements OnInit {
   done:boolean=true;
   wait:boolean=false;
   new:boolean=false;
+  loaded:boolean = false;
   constructor(private orderService:OrderService , private http:HttpClient , private router:Router) { }
 
   ngOnInit(): void {
+    
     this.getAllOrder() 
   }
 
@@ -62,48 +64,68 @@ export class MyOrderComponent implements OnInit {
   }
 
   getImage(code:number){
-    this.http.get(`http://localhost:8081/get/${code}.jpg`).subscribe(res => {
+    this.load = true ;
+    this.http.get(`https://alafyn20.herokuapp.com/get/${code}.jpg`).subscribe(res => {
       if(res !== null){
         this.retriveRespons = res;
         this.base64Data = this.retriveRespons.picBytes;
         this.reterviedImage = 'data:image/jpeg;base64,'+this.base64Data;
+        this.load = false;
       }
         
       } ,error => {
         this.reterviedImage='';
+        this.load = false ;
       });
     }
 
 
   getAllOrder(){
+    this.show = false ;
     this.orderService.findByUser(sessionStorage.getItem("user")).subscribe(data => {
       this.newOrders = [];
       this.doneOrders = [];
       this.waitOrders = [];
-      data.forEach(element => {
-        if(element.ok === false){
-          this.newOrders.unshift(element);
-        }else if(element.ok === true && element.done === false){
-          this.waitOrders.unshift(element);
-        }else if(element.ok === true , element.done === true){
-          this.doneOrders.unshift(element);
-        }
-      });
+      if(data !== null){
+        data.forEach(element => {
+          if(element.ok === false){
+            this.newOrders.unshift(element);
+          }else if(element.ok === true && element.done === false){
+            this.waitOrders.unshift(element);
+          }else if(element.ok === true , element.done === true){
+            this.doneOrders.unshift(element);
+          }
+        });
+      }
     });
   }
 
-  getOrder(code:number){
-    this.show = true;
+  dis:any;
 
+  getOrder(code:number){
+    this.loaded = true ;
+    this.show = true ;
+    setTimeout(() => {
+      this.loaded = false ;
+    }, 1000);
     this.orderService.findByCode(sessionStorage.getItem("user") , code).subscribe(data => {
+      this.dis = data.discription.split(' ');
       this.order = data;
+      let x = [];
+      this.dis.forEach(element => {
+        if(element === "*true"){
+          x.push(element);
+        }
+      });
+      this.order.discription = x.toString();
+
       this.getImage(data.code);
     });
   }
 
   removeImage(id:number , name:string){
 
-    this.http.delete(`http://localhost:8081/deleteImage/${id}/${name}`).subscribe(data =>{});
+    this.http.delete(`https://alafyn20.herokuapp.com/deleteImage/${id}/${name}`).subscribe(data =>{});
   }
 
   remove(id:number , name:string){

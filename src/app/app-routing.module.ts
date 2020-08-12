@@ -38,6 +38,9 @@ import { CompanyComponent } from './components/admin/order-found/company/company
 import { FindOrderComponent } from './components/store-user/store-orders/find-order/find-order.component';
 import { StoreProfileComponent } from './components/store-user/store-profile/store-profile.component';
 import { FinishedOrderComponent } from './components/admin/admin/orders/finished-order/finished-order.component';
+import { AdminNotificationComponent } from './components/admin/admin-notification/admin-notification.component';
+import { MainPageComponent } from './components/main/main-page/main-page.component';
+import { NotificationStoreComponent } from './components/store-user/notification-store/notification-store.component';
 
 
 const routes: Routes = [
@@ -48,16 +51,21 @@ const routes: Routes = [
   {path:"login" , component:LoginComponent},
   {path:"about-us" , component:AboutUsComponent},
   {path:"register/store" , component:StoreComponent},
-  {path:"myProfile" , component:MyprofileComponent , canActivate:[RouteGuardService]},
   {path:"password" , component:ChagePasswordComponent},
-  {path:"welcome" , component:MainComponent , canActivate:[RouteGuardService]},
+  {path:"welcome" , component:MainComponent , canActivate:[RouteGuardService] , children:[
+    {path:"updatedata" , component:UpdatedataComponent , canActivate:[RouteGuardService]},
+    {path:"account" , component:MyAccountComponent , canActivate:[RouteGuardService]}, 
+    {path:"myOrders" , component:MyOrderComponent , canActivate:[RouteGuardService]}, 
+    {path:"newOrder" , component:MainPageComponent , canActivate:[RouteGuardService]},
+    {path:"myProfile" , component:MyprofileComponent , canActivate:[RouteGuardService]},
+    {path:"notifications" , component:NotificationsComponent , canActivate:[RouteGuardService]},
+    {path:"myWallet" , component:WalletComponent , canActivate:[RouteGuardService]}
+  ]},
   {path:"register" , component:RegisterComponent},
   {path:"register/individual" , component:IndivualComponent},
   {path:"logout" , redirectTo:"login"},
-  {path:"notifications" , component:NotificationsComponent , canActivate:[RouteGuardService]},
-  {path:"myWallet" , component:WalletComponent , canActivate:[RouteGuardService]},
-  {path:"updatedata" , component:UpdatedataComponent , canActivate:[RouteGuardService]},
   {path:"welcome/admin" , component:AdminComponent , canActivate:[RouteGuardService]},
+  {path:"admin/notification" , component:AdminNotificationComponent , canActivate:[RouteGuardService]},
   {path:"users" , component:UsersComponent , canActivate:[RouteGuardService] },
   {path:"users/:username" , component:GetuserComponent , canActivate:[RouteGuardService] },
   {path:"admins" , component:AdminsComponent , canActivate:[RouteGuardService] },
@@ -75,8 +83,7 @@ const routes: Routes = [
   {path:"orders/waiting" , component:WaitingComponent , canActivate:[RouteGuardService]},
   {path:"orders/finished" , component:FinishedOrderComponent , canActivate:[RouteGuardService]},
   {path:"terms-conditions" , component:PrivacyComponent },
-  {path:"myOrders" , component:MyOrderComponent , canActivate:[RouteGuardService]}, 
-  {path:"account" , component:MyAccountComponent , canActivate:[RouteGuardService]}, 
+  {path:"store/notification" , component:NotificationStoreComponent , canActivate:[RouteGuardService]},   
   {path:"store/welcome" , component:StoreUserComponent , canActivate:[RouteGuardService]}, 
   {path:"**" , component:ErrorComponent}
 ];

@@ -1,7 +1,10 @@
 <app-store-nav></app-store-nav>
 <div class="container">
   <div class="form">
-    <form #carForm="ngForm">
+    <div class="wating" *ngIf="load">
+      <div class="loading"></div>
+    </div>
+    <form #carForm="ngForm" *ngIf="!load">
       <h2>{{car.id}}</h2>
       <div class="left">
         <div class="addImage" *ngIf="!reterviedImage">
@@ -50,10 +53,6 @@
           <div class="invalid-feedback" [hidden]="!carPhone.errors?.minlength">
             <p>Phone number minLength must be more than 11 char</p>
           </div>
-        </div>
-        <div class="form-group">
-          <label for=""></label>
-          <input type="text" name="" id="" class="form-control">
         </div>
         <div class="form-group">
           <button class="enter btn btn-success" (click)="addCar()">Add car</button>
