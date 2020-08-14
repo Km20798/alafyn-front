@@ -8,6 +8,7 @@
     <div class="wating" *ngIf="load">
       <div class="loading"></div>
     </div>
+    <h2 *ngIf="!load && orders">All Orders</h2>
     <table *ngIf="!load">
       <thead>
         <tr>
@@ -28,6 +29,7 @@
   </div>
   <div class="mar" *ngIf="!done">
     <div class="table" >
+      <h2 *ngIf="!load && Orders">New Orders</h2>
       <table>
         <thead>
           <tr>

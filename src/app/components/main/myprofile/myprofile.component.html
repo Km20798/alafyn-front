@@ -1,19 +1,20 @@
 
-<!-- <div class="working" *ngIf="show">
-  <div class="loading">
-    <div class="obj"></div>
-    <div class="obj"></div>
-    <div class="obj"></div>
-    <div class="obj"></div>
-    <div class="obj"></div>
-    <div class="obj"></div>
-    <div class="obj"></div>
-    <div class="obj"></div>
-  </div>
-</div> -->
+
 <div class="mainPage">
-  <div class="page" >
-    <div class="image">
+  <div class="working" *ngIf="show">
+    <div class="loading">
+      <div class="obj"></div>
+      <div class="obj"></div>
+      <div class="obj"></div>
+      <div class="obj"></div>
+      <div class="obj"></div>
+      <div class="obj"></div>
+      <div class="obj"></div>
+      <div class="obj"></div>
+    </div>
+  </div>
+  <div class="page" *ngIf="!show">
+    <div class="image" >
       <img [src]="reterviedImage" *ngIf="reterviedImage" alt="">
       <img src="../../../../assets/img/person.jpg" *ngIf="!reterviedImage" alt="">
       <button class="btn1 edit"  (click)="importImage()"><i class="fa fa-edit"></i></button>

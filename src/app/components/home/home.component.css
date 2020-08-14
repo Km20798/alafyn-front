@@ -10,6 +10,13 @@
   background-position: center;
   position: relative;
   overflow: hidden;
+  text-align: center;
+}
+.hero h2{
+  margin-top: 5%;
+  font-size: 90px;
+  color: #223771;
+  text-shadow: 10px 27px 10px #577d96;
 }
 .highway{
   height: 200px;

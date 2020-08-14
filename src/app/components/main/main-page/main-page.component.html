@@ -244,6 +244,7 @@
     <h6>The Distance between {{order.pickup_Location}} And {{order.address}} is <span>{{dist}}KM</span> </h6> 
     <h4>The cost of that Order is :-</h4>
     <h3><span>{{order.price | number : '1.0-0'}}L.E</span></h3>
+    <p class="worker" *ngIf="order.delivery_method !== 'Delivery'">The workers determine their money</p>
     <button class="btn btn-success" (click)="addOrder()">Accept</button>
     <button class="btn btn-danger" (click)="refuse()">Refuse</button>
   </div>

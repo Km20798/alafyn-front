@@ -15,12 +15,36 @@ li{
   width: 20%;
   
 }
+button{
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: gray;
+  display: flex;
+}
+button:hover{
+  color: white;
+}
+button:focus{
+  border: none;
+  background-color: none;
+  outline: none;
+
+}
 .li{
   width: 12%;
+}
+.sp{
+  position: absolute;
+    top: 0px;
+    left: 57.4%;
+    border-radius: 30px;
 }
 a{
   text-decoration: none;
   color: grey;
+  display: flex;
+  cursor: pointer;
 }
 a:hover{
   color: white;

@@ -4,16 +4,23 @@
     <div class="working">
       <h5>notifications</h5>
     </div>
-    <div class="not" *ngFor="let notification of notifications">
-      <div class="noto" [ngClass]="{refuse: notification.accept === false}">
-        <div class="cont">
-          <div class="d1">
-           <p class="header">
-            {{notification.sender}}
-          </p>
-          <p class="contant">-{{notification.content}} </p>
+    <div class="wati" *ngIf="load">
+      <div class="loading">
+        <span>loading...</span>
+      </div>
+    </div>
+    <div *ngIf="!load">
+      <div class="not" *ngFor="let notification of notifications">
+        <div class="noto" [ngClass]="{refuse: notification.accept === false}">
+          <div class="cont">
+            <div class="d1">
+             <p class="header">
+              {{notification.sender}}
+            </p>
+            <p class="contant">-{{notification.content}} </p>
+            </div>
+             <p class="time">{{notification.time| date:'short'}}</p>
           </div>
-           <p class="time">{{notification.time| date:'short'}}</p>
         </div>
       </div>
     </div>

@@ -103,6 +103,7 @@ export class FindOrderComponent implements OnInit {
     this.order.done = true;
     this.orderService.updateOrder(this.order.id , this.order).subscribe(data => {
       this.sendToUser();
+      this.sendToAdmin();
       this.router.navigate([`/store/orders`]);
     });
   }
@@ -119,17 +120,15 @@ export class FindOrderComponent implements OnInit {
     this.notifcation.sender = sessionStorage.getItem("user");
     this.notifcation.accept= true;
     this.cm.addNotifications(this.notifcation).subscribe(data => {
-      this.router.navigate(['/welcome/admin'])
     });
   }
 
   sendToAdmin(){
     this.notifcation.content = "We finished Order with code "+this.order.code+" successfully which belong to "+this.order.user.email;
-    this.notifcation.rec = this.order.user.email;
+    this.notifcation.rec = 'admin@gmail.com';
     this.notifcation.sender = sessionStorage.getItem("user");
     this.notifcation.accept= true;
     this.cm.addNotifications(this.notifcation).subscribe(data => {
-      this.router.navigate(['/welcome/admin'])
     });
   }
 

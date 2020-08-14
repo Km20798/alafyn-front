@@ -71,6 +71,8 @@ export class MyOrderComponent implements OnInit {
         this.base64Data = this.retriveRespons.picBytes;
         this.reterviedImage = 'data:image/jpeg;base64,'+this.base64Data;
         this.load = false;
+      }else{
+        this.load = false;
       }
         
       } ,error => {

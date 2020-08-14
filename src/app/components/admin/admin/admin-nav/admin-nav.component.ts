@@ -6,6 +6,7 @@ import { User } from 'src/app/models/user.model';
 import { OrderService } from 'src/app/services/order.service';
 import { HttpClient } from '@angular/common/http';
 import { ChatMessageService } from 'src/app/services/chat-message.service';
+import { Notifications } from 'src/app/models/Notifications.model';
 
 @Component({
   selector: 'app-admin-nav',
@@ -33,20 +34,16 @@ export class AdminNavComponent implements OnInit {
   reterviedImage:any;
   base64Data:any;
   retriveRespons:any;
-  num:number;
+  num:number = null;
 
-  constructor(private userService:UserService , private router:Router , private orderService:OrderService , private auth:AuthService , private http:HttpClient , private cms:ChatMessageService ) { }
+  constructor(private userService:UserService , private router:Router , private orderService:OrderService , private auth:AuthService , private http:HttpClient , private ns:ChatMessageService ) { }
 
   ngOnInit(): void {
     this.getUser()
-    this.getNotificationNotRead();
+    this.getNewNotification();
   }
 
-  getNotificationNotRead(){
-    this.cms.getNotSeen("admin@gmail.com" , false).subscribe(data => {
-      this.num = data.length;
-    })
-  }
+  
 
   getImage(){
     this.http.get(`http://localhost:8081/get/`+this.user.email).subscribe(res => {
@@ -70,10 +67,37 @@ export class AdminNavComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  getNotification(){
-    this.router.navigate(['/admin/notification']);
-    this.num = null ;
-    console.log(this.num)
+  getNewNotification(){
+    this.ns.getNotSeen(sessionStorage.getItem("user") , false).subscribe(data => {
+      if(data){
+        this.num = data.length;
+      }
+    })
   }
+
+  // getNotification(){
+  //   this.router.navigate(['/admin/notification']);
+  //   this.num = null ;
+  //   console.log(this.num)
+  // }
+
+  updateNotifcation(notication:Notifications){
+    this.ns.updateNotifcations(notication.id , notication).subscribe(data => {
+    });
+  }
+
+  getNotification(){
+    this.ns.getNotSeen("admin@gmail.com" , false).subscribe(data => {
+     if(data){
+      data.forEach(element => {
+        this.updateNotifcation(element);
+      });
+     }
+      this.num = null;
+      this.router.navigate(['/admin/notification']);
+    })
+    
+  }
+
   
 }

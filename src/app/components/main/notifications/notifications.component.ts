@@ -12,7 +12,7 @@ export class NotificationsComponent implements OnInit {
 
   notifications:Notifications[]=[]; 
   user = localStorage.getItem('user');
-  
+  load:boolean=true ;
 
   constructor(private chatMessage:ChatMessageService) { }
 
@@ -29,6 +29,7 @@ getAllNotifications(){
         this.notifications.unshift(element);
       });
     }
+    this.load = false;
   })
 }
 

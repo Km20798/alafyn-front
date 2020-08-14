@@ -19,7 +19,7 @@ export class AdminNotificationComponent implements OnInit {
   }
 
 getAllNotifications(){
-  this.chatMessage.getNotSeen("admin@gmail.com" , false).subscribe(data => {
+  this.chatMessage.getAll("admin@gmail.com").subscribe(data => {
     data.forEach(element => {
       this.notifications.unshift(element);
     }); 

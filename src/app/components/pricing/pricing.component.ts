@@ -48,10 +48,11 @@ export class PricingComponent implements OnInit {
                       alert("cannot fetch this place");
                   } else {
                       this.dist= res.route.distance * 1.6; 
-                      this.price = this.dist * this.car * this.number; 
+                      this.price = ((this.dist*5) + Number(this.car)) * this.number ; 
+                      console.log(typeof(this.car));
                   }
               })
-              .catch(err => { console.log(err) })
+              .catch(err => { console.log("your network") });
       }
   }
   

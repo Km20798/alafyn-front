@@ -240,6 +240,7 @@ export class MainPageComponent implements OnInit {
       this.order.user=this.user;
       this.reterviedImage=null;
       this.order.car = null;
+      this.show = true;
       this.removeImage(this.order.code);
     }
 
@@ -305,15 +306,19 @@ export class MainPageComponent implements OnInit {
                   } else {
                       this.dist= res.route.distance * 1.6; 
                       if(this.order.vehicle_type === "MiniVan"){
-                        this.order.price = this.dist * 1 * 10 * this.order.car ;
+                        this.order.price = ((this.dist*5) + 25) * this.order.car ;
                       }else if(this.order.vehicle_type === "Pickup"){
-                        this.order.price = this.dist * 1 * 20 * this.order.car;
+                        this.order.price = ((this.dist*5) + 50) * this.order.car ;
                       }else if(this.order.vehicle_type === "Jumbo"){
-                        this.order.price = this.dist * 1 * 30 * this.order.car;
+                        this.order.price = ((this.dist*5) + 100) * this.order.car ;
                       }else if(this.order.vehicle_type === "Jumbo Closed Body"){
-                        this.order.price = this.dist * 1 * 40 * this.order.car;
+                        this.order.price = ((this.dist*5) + 100) * this.order.car ;
                       }else if(this.order.vehicle_type === "Flatbed Trailer"){
-                        this.order.price = this.dist * 1 * 50 * this.order.car;
+                        this.order.price = ((this.dist*5) + 200) * this.order.car ;
+                      }
+
+                      if(this.order.delivery_method === "Move Your House"){
+                        this.order.price = this.order.price+100;
                       }
                   }
               })
